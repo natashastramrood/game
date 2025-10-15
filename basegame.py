@@ -1,8 +1,6 @@
 import pygame
 #from characterclass import Character
 
-#user = Character()
-
 pygame.init()
 WIDTH = 600
 HEIGHT = 400
@@ -11,6 +9,7 @@ print(type(screen))
 clock = pygame.time.Clock()
 running = True
 
+#user = Character()
 
 sky_blue = [0, 150, 255]
 

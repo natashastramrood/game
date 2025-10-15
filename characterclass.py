@@ -1,7 +1,7 @@
 import pygame
 class Character:
     def __init__(self, x=0, y=0, xspeed=5, yspeed = 0):
-        self.image = pygame.image.load('images/character_femaleAdventurer_wide.png')
+        self.image = pygame.image.load('images/Characters/Female adventurer/PNG/Poses/character_femaleAdventurer_wide.png')
         self.surface = pygame.transform.rotozoom(self.image, 0, 0.8)
         self.x = x
         self.y = y
