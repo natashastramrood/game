@@ -39,7 +39,10 @@ background = Background(WIDTH, HEIGHT)
 background = background.get_background()
 #blit the background to our screen
 counter = 0
-while lives > 0 or len(enemy_spaceship) > 0:
+running = True
+
+### LEVEL 1 #####################################################################
+while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
@@ -105,14 +108,18 @@ while lives > 0 or len(enemy_spaceship) > 0:
     #update the spaceship position
     spaceship1.input(spaceship1, keys)
     spaceship1.draw(screen)
-        
 
+    #check if user is still alive or if all enemies are dead    
+    if lives == 0 or len(enemy_spaceship) == 0:
+        running = False
 
     pygame.display.flip()
 
     clock.tick(60)
 
-font = pygame.font.Font(None, 36)
+
+### END SCREEN #########################################################
+font = pygame.font.Font(None, 200)
 running = True
 while running:
     for event in pygame.event.get():
@@ -121,6 +128,7 @@ while running:
 
     screen.fill((0, 0, 0))  # clear screen with black
 
+    text_surface = font.render("End Game!", True, (255, 255, 255))
     if lives == 0:
         text_surface = font.render("You Died!", True, (255, 255, 255))
     elif len(enemy_spaceship) == 0:
