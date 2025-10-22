@@ -112,4 +112,23 @@ while lives > 0 or len(enemy_spaceship) > 0:
 
     clock.tick(60)
 
+font = pygame.font.Font(None, 36)
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+
+    screen.fill((0, 0, 0))  # clear screen with black
+
+    if lives == 0:
+        text_surface = font.render("You Died!", True, (255, 255, 255))
+    elif len(enemy_spaceship) == 0:
+        text_surface = font.render("You Win!", True, (255, 255, 255))
+
+    screen.blit(text_surface, (100, 100))
+
+    pygame.display.flip()
+    clock.tick(60)       
+
 pygame.quit()
