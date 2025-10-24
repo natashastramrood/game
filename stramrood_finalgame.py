@@ -4,6 +4,8 @@ from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
 from enemylaser import EnemyLaser
+from asteroid import Asteroid
+from random import randint
 
 pygame.init()
 
@@ -28,6 +30,11 @@ enemy_spaceship = [EnemySpaceship(WIDTH-60, 70, 2),
 #make lists for laser and enemy laser to keep track of lasers in the game
 laser = []
 enemylaser=[]
+asteroids = [Asteroid(200, 100, 1, 0.5, 60), 
+             Asteroid(400, 150, 0.75, 0.5, 80),
+             Asteroid(320, 625, 0.5, -1, 10),
+             Asteroid(50, 530, -1.25, 0.5, 0),
+             Asteroid(600, 275, 1.25, -0.5, 0)]
 
 #set starting lives
 lives = 3
@@ -77,6 +84,10 @@ while running:
         if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
             lives -= 1
             enemylaser_remove.append(i)
+
+    for i in range(len(asteroids)):
+        asteroids[i].update()
+        asteroids[i].draw(screen)
 
     #remove enemies and lasers that are intersecting
     laser_remove = list(set(laser_remove))
