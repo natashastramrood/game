@@ -40,6 +40,11 @@ class Asteroid():
         self.y += self.yspeed
         self.rect.center = (self.x,self.y)
 
+    def explode(self, x, y):
+        self.x = x
+        self.y = y
+        self.image = pygame.image.load('images/PNG/Blacksmoke/blackSmoke00.png')
+
     def get_rect(self):
         return self.rect
     
