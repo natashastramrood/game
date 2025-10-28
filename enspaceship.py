@@ -4,15 +4,15 @@ from laser import Laser
 from random import randint
 
 class EnemySpaceship:
-    def __init__(self, x=0, y=0, yspeed = 5):
+    def __init__(self, x=0, y=0, rotation=90, yspeed = 5):
         self.image = pygame.image.load('images/Space/PNG/playerShip2_red.png')
-        self.surface = pygame.transform.rotozoom(self.image, 90, 0.8) # rotate the image
+        self.surface = pygame.transform.rotozoom(self.image, rotation, 0.8) # rotate the image
         # make a new surface so the starting rotation of the spaceship
         self.finalsurface = pygame.transform.rotozoom(self.surface, 0, 1) 
         self.x = x
         self.y = y
         self.ystart = y
-        self.roto = 0 # this is in degrees
+        self.roto = rotation-90 # this is in degrees
         self.xspeed = 0
         self.yspeed = yspeed
         self.range = 120
