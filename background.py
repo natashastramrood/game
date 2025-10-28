@@ -1,6 +1,6 @@
 import pygame
 
-class Background():
+class SpaceBackground():
     def __init__(self, WIDTH, HEIGHT):
         self.width = WIDTH
         self.height = HEIGHT
@@ -21,3 +21,17 @@ class Background():
 
     def get_background(self):
         return self.final_background
+    
+class GroundBackground():
+    def __init__(self, WIDTH, HEIGHT):
+        self.width = WIDTH
+        self.height = HEIGHT
+        block_path = ''#get a background path
+        building_path = '' #get building pieces
+        #self.sky_surface pygame.image.load(background_path)
+        self.final_background = pygame.Surface((self.width, self.height))
+        self.final_background.fill('blue')
+    def get_background(self):
+        return self.final_background
+
+        

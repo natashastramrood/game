@@ -1,5 +1,5 @@
 import pygame
-from background import Background
+from background import SpaceBackground, GroundBackground
 from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
@@ -30,6 +30,8 @@ enemy_spaceship = [EnemySpaceship(WIDTH-60, 70, 90, 2),
 #make lists for laser and enemy laser to keep track of lasers in the game
 laser = []
 enemylaser=[]
+
+#create the asteroids
 asteroids = [Asteroid(200, 100, 0.1, 0.04, 60), 
              Asteroid(400, 150, -0.075, 0.05, 80),
              Asteroid(320, 625, 0.05, -0.1, 10),
@@ -43,17 +45,22 @@ lives = 3
 #initialize font
 font = pygame.font.Font(None, 36)
 
-background = Background(WIDTH, HEIGHT)
+#initialize the background
+background = SpaceBackground(WIDTH, HEIGHT)
 background = background.get_background()
-#blit the background to our screen
-counter = 0
+
+#final checks if the person exited the game voluntarily
+final = 0
+#running checks if that level is running or not
 running = True
 
+counter = 0
 ### LEVEL 1 #####################################################################
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            final = 1
     
     #draw background
     screen.blit(background, (0,0))
@@ -86,13 +93,14 @@ while running:
             lives -= 1
             enemylaser_remove.append(i)
 
-    # Check collisions between enemy lasers and player or asteroids
+    # Check collisions between enemy lasers and player
     for i in range(len(enemylaser)):
         if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
             lives -= 1
             enemylaser_remove.append(i)
             continue
-
+    
+    #update asteroid position
     for i in range(len(asteroids)):
         asteroids[i].update()
         asteroids[i].draw(screen)
@@ -129,14 +137,17 @@ while running:
     spaceship1.draw(screen)
 
     #check if user is still alive or if all enemies are dead    
-    if lives == 0 or len(enemy_spaceship) == 0:
+    if lives == 0:
+        running = False
+        final += 1
+    elif len(enemy_spaceship) == 0:
         running = False
 
     pygame.display.flip()
 
     clock.tick(60)
 
-
+#create new enemy spaceships on the other side of the screen
 enemy_spaceship = [EnemySpaceship(60, 70, 270, 2),
                    EnemySpaceship(60, 160, 270, 2),
                    EnemySpaceship(60, 250, 270, 2),
@@ -144,13 +155,18 @@ enemy_spaceship = [EnemySpaceship(60, 70, 270, 2),
                    EnemySpaceship(60, 430, 270, 2),
                    EnemySpaceship(60, 520, 270, 2)]
 
+laser = []
+enemylaser = []
+
+#reset running as true
 running = True
 
 ### LEVEL 1 CONTINUED #####################################################################
-while running:
+while running and final != 1:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+            final = 1
     
     #draw background
     screen.blit(background, (0,0))
@@ -183,7 +199,7 @@ while running:
             lives -= 1
             enemylaser_remove.append(i)
 
-    # Check collisions between enemy lasers and player or asteroids
+    # Check collisions between enemy lasers and player
     for i in range(len(enemylaser)):
         if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
             lives -= 1
@@ -226,14 +242,32 @@ while running:
     spaceship1.draw(screen)
 
     #check if user is still alive or if all enemies are dead    
-    if lives == 0 or len(enemy_spaceship) == 0:
+    if lives == 0:
+        running = False
+        final = 1
+    elif len(enemy_spaceship) == 0:
         running = False
 
     pygame.display.flip()
 
     clock.tick(60)
 
+#initialize new background for new world
+background = GroundBackground(WIDTH, HEIGHT)
+background = background.get_background()
 
+running = True
+###  LEVEL 2  ##########################################################
+while running and final != 1:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+            final = 1
+    screen.blit(background, (0,0))
+    
+    pygame.display.flip()
+
+    clock.tick(60)
 
 ### END SCREEN #########################################################
 font = pygame.font.Font(None, 200)
