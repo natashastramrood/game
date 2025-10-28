@@ -30,13 +30,12 @@ enemy_spaceship = [EnemySpaceship(WIDTH-60, 70, 2),
 #make lists for laser and enemy laser to keep track of lasers in the game
 laser = []
 enemylaser=[]
-asteroids = [Asteroid(200, 100, 0.5, 0.25, 60), 
-             Asteroid(400, 150, -0.375, 0.25, 80),
-             Asteroid(320, 625, 0.25, -0.5, 10),
-             Asteroid(50, 530, 0.5, 0.25, 0),
-             Asteroid(600, 275, 0.75, -0.25, 0),
-             Asteroid(750, 400, 0.25, 0.5, 0)]
-explosions = []
+asteroids = [Asteroid(200, 100, 0.1, 0.04, 60), 
+             Asteroid(400, 150, -0.075, 0.05, 80),
+             Asteroid(320, 625, 0.05, -0.1, 10),
+             Asteroid(50, 530, 0.1, 0.05, 0),
+             Asteroid(600, 275, 0.15, -0.05, 0),
+             Asteroid(750, 400, 0.05, 0.1, 0)]
 
 #set starting lives
 lives = 3
@@ -86,15 +85,6 @@ while running:
         if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
             lives -= 1
             enemylaser_remove.append(i)
-        for k in range(len(asteroids)):
-            if enemylaser[i].get_rect().colliderect(asteroids[k].get_rect()):
-                image = pygame.image.load('images/PNG/Blacksmoke/blackSmoke00.png')
-                surface2 = pygame.transform.rotozoom(image, 0, 0.2)
-                screen.blit(surface2, (asteroids[k].x, asteroids[k].y))
-                asteroid_remove.append(k)
-                enemylaser_remove.append(i)
-
-    asteroid_remove = []
 
     # Check collisions between enemy lasers and player or asteroids
     for i in range(len(enemylaser)):
@@ -103,37 +93,9 @@ while running:
             enemylaser_remove.append(i)
             continue
 
-        # Check asteroid collisions
-        for k in range(len(asteroids)):
-            if enemylaser[i].get_rect().colliderect(asteroids[k].get_rect()):
-                # Load explosion smoke once (better done outside loop ideally)
-                image = pygame.image.load('images/PNG/Blacksmoke/blackSmoke00.png').convert_alpha()
-                surface2 = pygame.transform.rotozoom(image, 0, 0.5)
-
-                # Get center of the smoke so it aligns with asteroid center
-                rect = surface2.get_rect(center=(asteroids[k].x, asteroids[k].y))
-                screen.blit(surface2, rect.topleft)
-
-                # Mark both for removal
-                asteroid_remove.append(k)
-                enemylaser_remove.append(i)
-                break  # stop checking this laser, it already hit something
-
-    # Remove asteroids that got hit
-    asteroid_remove = list(set(asteroid_remove))
-    for k in sorted(asteroid_remove, reverse=True):
-        if 0 <= k < len(asteroids):
-            asteroids.pop(k)
-
-    asteroid_remove = []
     for i in range(len(asteroids)):
         asteroids[i].update()
         asteroids[i].draw(screen)
-
-    asteroid_remove = list(set(asteroid_remove))
-    for k in sorted(asteroid_remove, reverse=True):
-        if 0 <= k < len(asteroid_remove):
-            asteroid_remove.pop(k)
 
     #remove enemies and lasers that are intersecting
     laser_remove = list(set(laser_remove))
