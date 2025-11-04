@@ -2,7 +2,7 @@ import pygame
 from background import SpaceBackground
 from spaceship import Spaceship
 
-def runLevelSelectionScreen():
+def runLevelSelectionScreen(levels_completed):
     WIDTH = 1100
     HEIGHT = 700
     screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -70,22 +70,22 @@ def runLevelSelectionScreen():
         spaceship1.draw(screen)
 
         #check if spaceship collides with any of the planets
-        if spaceship1.get_rect().collidepoint(planet1_rect.center):
+        if spaceship1.get_rect().collidepoint(planet1_rect.center) and 1 not in levels_completed:
             level = 1
             running = False
-        elif spaceship1.get_rect().collidepoint(planet2_rect.center):
+        elif spaceship1.get_rect().collidepoint(planet2_rect.center) and 2 not in levels_completed:
             level = 2
             running = False
-        elif spaceship1.get_rect().collidepoint(planet3_rect.center):
+        elif spaceship1.get_rect().collidepoint(planet3_rect.center) and 3 not in levels_completed:
             level = 3
             running = False
-        elif spaceship1.get_rect().collidepoint(planet4_rect.center):
+        elif spaceship1.get_rect().collidepoint(planet4_rect.center) and 4 not in levels_completed:
             level = 4
             running = False
-        elif spaceship1.get_rect().collidepoint(planet5_rect.center):
+        elif spaceship1.get_rect().collidepoint(planet5_rect.center) and 5 not in levels_completed:
             level = 5
             running = False
-        elif spaceship1.get_rect().collidepoint(planet6_rect.center):
+        elif spaceship1.get_rect().collidepoint(planet6_rect.center) and 6 not in levels_completed:
             level = 6
             running = False
         pygame.display.flip()

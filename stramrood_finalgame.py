@@ -15,28 +15,43 @@ pygame.init()
 
 lives = 3
 final = 0
-level = 0
+num_completed = 0
+levels_completed = []
 
-final, level = runLevelSelectionScreen()
+while num_completed <= 6 and final != 1:
+    level = 0
+    final, level = runLevelSelectionScreen(levels_completed)
 
-if level == 1: 
-    final, lives = runWorld1(final, 'green') # world 1
-    # final, lives = runWorld2(final, lives) # world 2 
-if level == 2: 
-    final, lives = runWorld1(final, 'red') # world 1
-    #final, lives = runWorld2(final, lives) # world 2 
-if level == 3: 
-    final, lives = runWorld1(final, 'blue') # world 1
-    #final, lives = runWorld2(final, lives) # world 2 
-if level == 4: 
-    final, lives = runWorld1(final, 'orange') # world 1
-    #final, lives = runWorld2(final, lives) # world 2 
-if level == 5: 
-    final, lives = runWorld1(final, 'blue') # world 1
-    #final, lives = runWorld2(final, lives) # world 2 
-if level == 6: 
-    final, lives = runWorld1(final, 'red') # world 1
-    #final, lives = runWorld2(final, lives) # world 2 
+    if level == 1: 
+        final, lives = runWorld1(final, 'green') # world 1
+        # final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(1)
+    if level == 2: 
+        final, lives = runWorld1(final, 'red') # world 1
+        #final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(2)
+    if level == 3: 
+        final, lives = runWorld1(final, 'blue') # world 1
+        #final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(3)
+    if level == 4: 
+        final, lives = runWorld1(final, 'orange') # world 1
+        #final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(4)
+    if level == 5: 
+        final, lives = runWorld1(final, 'blue') # world 1
+        #final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(5)
+    if level == 6: 
+        final, lives = runWorld1(final, 'red') # world 1
+        #final, lives = runWorld2(final, lives) # world 2 
+        num_completed += 1
+        levels_completed.append(6)
 
 #go through and check the outcome of the match
 if final == 1:
