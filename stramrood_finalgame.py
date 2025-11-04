@@ -9,21 +9,34 @@ from random import randint
 from World1 import runWorld1
 from World2 import runWorld2
 from EndScreen import runEndScreen
+from StartingScreen import runLevelSelectionScreen
 
 pygame.init()
 
-#make screen properties
-WIDTH = 1100
-HEIGHT = 700
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-clock = pygame.time.Clock()
-running = True
-
 lives = 3
 final = 0
+level = 0
 
-final, lives = runWorld1(final)
-final, lives = runWorld2(final, lives)
+final, level = runLevelSelectionScreen()
+
+if level == 1: 
+    final, lives = runWorld1(final, 'green') # world 1
+    # final, lives = runWorld2(final, lives) # world 2 
+if level == 2: 
+    final, lives = runWorld1(final, 'red') # world 1
+    #final, lives = runWorld2(final, lives) # world 2 
+if level == 3: 
+    final, lives = runWorld1(final, 'blue') # world 1
+    #final, lives = runWorld2(final, lives) # world 2 
+if level == 4: 
+    final, lives = runWorld1(final, 'orange') # world 1
+    #final, lives = runWorld2(final, lives) # world 2 
+if level == 5: 
+    final, lives = runWorld1(final, 'blue') # world 1
+    #final, lives = runWorld2(final, lives) # world 2 
+if level == 6: 
+    final, lives = runWorld1(final, 'red') # world 1
+    #final, lives = runWorld2(final, lives) # world 2 
 
 #go through and check the outcome of the match
 if final == 1:
@@ -34,8 +47,6 @@ else:
     result = 1
 
 #end screen
-runEndScreen(result, screen)
-
-
+runEndScreen(result)
 
 pygame.quit()

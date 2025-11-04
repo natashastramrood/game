@@ -1,5 +1,8 @@
 import pygame
-def runEndScreen(result, screen):
+def runEndScreen(result):
+    WIDTH = 1100
+    HEIGHT = 700
+    screen = pygame.display.set_mode((WIDTH, HEIGHT))
     font = pygame.font.Font(None, 200)
     running = True
     clock = pygame.time.Clock()

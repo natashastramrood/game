@@ -7,7 +7,7 @@ from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
 
-def runWorld1(final):
+def runWorld1(final, color):
     #make screen properties
     WIDTH = 1100
     HEIGHT = 700
@@ -15,16 +15,19 @@ def runWorld1(final):
     clock = pygame.time.Clock()
     running = True
 
+    color1 = color
+
     #create our user spaceship
     spaceship1 = Spaceship(WIDTH/2, HEIGHT/2, 5, 5)
 
+
     #initialise starting enemy ships
-    enemy_spaceship = [EnemySpaceship(WIDTH-60, 70, 90, 2),
-                    EnemySpaceship(WIDTH-60, 160, 90, 2),
-                    EnemySpaceship(WIDTH-60, 250, 90, 2),
-                    EnemySpaceship(WIDTH-60, 340, 90, 2),
-                    EnemySpaceship(WIDTH-60, 430, 90, 2),
-                    EnemySpaceship(WIDTH-60, 520, 90, 2)]
+    enemy_spaceship = [EnemySpaceship(color1, WIDTH-60, 70, 90, 2),
+                    EnemySpaceship(color1, WIDTH-60, 160, 90, 2),
+                    EnemySpaceship(color1, WIDTH-60, 250, 90, 2),
+                    EnemySpaceship(color1, WIDTH-60, 340, 90, 2),
+                    EnemySpaceship(color1, WIDTH-60, 430, 90, 2),
+                    EnemySpaceship(color1, WIDTH-60, 520, 90, 2)]
 
     #make lists for laser and enemy laser to keep track of lasers in the game
     laser = []
@@ -37,7 +40,6 @@ def runWorld1(final):
                 Asteroid(50, 530, 0.1, 0.05, 0),
                 Asteroid(600, 275, 0.15, -0.05, 0),
                 Asteroid(750, 400, 0.05, 0.1, 0)]
-
     #set starting lives
     lives = 3
 
@@ -55,7 +57,7 @@ def runWorld1(final):
 
     counter = 0
     ### LEVEL 1 #####################################################################
-    while running:
+    while running and final != 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -147,12 +149,12 @@ def runWorld1(final):
         clock.tick(60)
 
     #create new enemy spaceships on the other side of the screen
-    enemy_spaceship = [EnemySpaceship(60, 70, 270, 2),
-                    EnemySpaceship(60, 160, 270, 2),
-                    EnemySpaceship(60, 250, 270, 2),
-                    EnemySpaceship(60, 340, 270, 2),
-                    EnemySpaceship(60, 430, 270, 2),
-                    EnemySpaceship(60, 520, 270, 2)]
+    enemy_spaceship = [EnemySpaceship(color1, 60, 70, 270, 2),
+                    EnemySpaceship(color1, 60, 160, 270, 2),
+                    EnemySpaceship(color1, 60, 250, 270, 2),
+                    EnemySpaceship(color1, 60, 340, 270, 2),
+                    EnemySpaceship(color1, 60, 430, 270, 2),
+                    EnemySpaceship(color1, 60, 520, 270, 2)]
 
     laser = []
     enemylaser = []
