@@ -229,7 +229,7 @@ def runWorld1(final, color):
         for i in range(len(enemy_spaceship)):
             #check if enemy is ready to shoot
             if enemy_spaceship[i].ready_to_shoot() == True :
-                enemylaser.append(EnemyLaser(enemy_spaceship[i].x, enemy_spaceship[i].y, 7, 180))
+                enemylaser.append(EnemyLaser(enemy_spaceship[i].x, enemy_spaceship[i].y, -7, 0))
             enemy_spaceship[i].update(HEIGHT)
             enemy_spaceship[i].draw(screen)
 

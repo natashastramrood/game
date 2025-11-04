@@ -24,7 +24,7 @@ while num_completed <= 6 and final != 1:
 
     if level == 1: 
         final, lives = runWorld1(final, 'green') # world 1
-        # final, lives = runWorld2(final, lives) # world 2 
+        # final, lives = runWorld2(final, lives) # worldd 2 
         num_completed += 1
         levels_completed.append(1)
     if level == 2: 
