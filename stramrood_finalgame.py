@@ -10,6 +10,7 @@ from World1 import runWorld1
 from World2 import runWorld2
 from EndScreen import runEndScreen
 from StartingScreen import runLevelSelectionScreen
+from SecondWorld1 import runSecondWorld1
 
 pygame.init()
 
@@ -23,7 +24,7 @@ while num_completed <= 6 and final != 1:
     final, level = runLevelSelectionScreen(levels_completed)
 
     if level == 1: 
-        final, lives = runWorld1(final, 'green') # world 1
+        final, lives = runSecondWorld1(final, 'green') # world 1
         # final, lives = runWorld2(final, lives) # worldd 2 
         num_completed += 1
         levels_completed.append(1)
@@ -43,12 +44,12 @@ while num_completed <= 6 and final != 1:
         num_completed += 1
         levels_completed.append(4)
     if level == 5: 
-        final, lives = runWorld1(final, 'blue') # world 1
+        final, lives = runSecondWorld1(final, 'blue') # world 1
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(5)
     if level == 6: 
-        final, lives = runWorld1(final, 'red') # world 1
+        final, lives = runSecondWorld1(final, 'red') # world 1
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(6)
