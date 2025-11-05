@@ -22,10 +22,10 @@ class Text():
         self.lives_surface = self.lives_font.render('3', 1, self.white)
 
     def update_score(self,score):
-        self.score_surface = self.score_font.render(f"{score}", 1, self.white)
+        self.score_surface = self.score_font.render(f"Score : {score}", 1, self.white)
 
     def update_lives(self, lives):
-        self.lives_surface = self.lives_font.render(f"{lives}", 1, self.white)
+        self.lives_surface = self.lives_font.render(f"Lives : {lives}", 1, self.white)
 
     def updatetitle(self):
         #adjust the alpha of the title based on how long the text has been in
@@ -40,4 +40,4 @@ class Text():
         screen.blit(self.score_surface, (20, 20))
 
     def drawlives(self, screen):
-        screen.blit(self.lives_surface, (1050, 20))
+        screen.blit(self.lives_surface, (850, 20))

@@ -26,7 +26,7 @@ def runEndScreen(result):
         else: 
             text_surface = font.render("End Game!", True, bright_blue)
         
-        screen.blit(text_surface, (150, 200))
+        screen.blit(text_surface, (175, 225))
         pygame.display.flip()
         clock.tick(1200)  
     

@@ -52,7 +52,9 @@ def runLevelSelectionScreen(levels_completed):
     planet6_rect = planet6.get_rect()
     planet6_rect.topleft = (775, 450)
 
-    checkmark = pygame.image.load('images/2783-200.png')
+    checkmark_image = pygame.image.load('images/2783-200.png')
+    checkmark = pygame.transform.rotozoom(checkmark_image, 0, 0.90)
+    checkmark.set_alpha(200)
 
     level = 0
 
@@ -75,17 +77,17 @@ def runLevelSelectionScreen(levels_completed):
 
         for i in levels_completed: 
             if i == 1:
-                screen.blit(checkmark, (100, 50))
+                screen.blit(checkmark, (118, 70))
             elif i == 2:
-                screen.blit(checkmark, (50, 250))
+                screen.blit(checkmark, (68, 270))
             elif i == 3:
-                screen.blit(checkmark, (100, 450))
+                screen.blit(checkmark, (118, 470))
             elif i == 4:
-                screen.blit(checkmark, (775, 50))
+                screen.blit(checkmark, (793, 70))
             elif i == 5:
-                screen.blit(checkmark, (825, 250))
+                screen.blit(checkmark, (843, 270))
             elif i == 6:
-                screen.blit(checkmark, (775, 450))
+                screen.blit(checkmark, (793, 470))
 
         #update and move spaceship
         keys = pygame.key.get_pressed()

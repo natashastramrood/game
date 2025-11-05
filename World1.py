@@ -93,12 +93,14 @@ def runWorld1(final, color, s):
                 if(laser[i].get_rect()).colliderect(enemy_spaceship[k].get_rect()) == True:
                     laser_remove.append(i)
                     enemy_remove.append(k)
+                    score += 100
                     continue
 
         # Check collisions between enemy lasers and player
         for i in range(len(enemylaser)):
             if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
                 lives = lives - 1
+                score -= 20
                 enemylaser_remove.append(i)
                 continue
         
@@ -199,12 +201,14 @@ def runWorld1(final, color, s):
                 if(laser[i].get_rect()).colliderect(enemy_spaceship[k].get_rect()) == True:
                     laser_remove.append(i)
                     enemy_remove.append(k)
+                    score += 100
                     continue
 
         # Check collisions between enemy lasers and player
         for i in range(len(enemylaser)):
             if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
                 lives -= 1
+                score -= 20
                 enemylaser_remove.append(i)
                 continue
 
