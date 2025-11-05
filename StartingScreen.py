@@ -1,6 +1,7 @@
 import pygame
 from background import SpaceBackground
 from spaceship import Spaceship
+from Lives_and_Title_text import Text
 
 def runLevelSelectionScreen(levels_completed):
     WIDTH = 1100
@@ -12,6 +13,9 @@ def runLevelSelectionScreen(levels_completed):
 
     #checker to see if the user voluntarily exited the game
     final = 0
+
+    #create instance of text class
+    title = Text()
 
     background = SpaceBackground(WIDTH, HEIGHT)
     background2 = background.get_background()
@@ -65,6 +69,9 @@ def runLevelSelectionScreen(levels_completed):
         screen.blit(planet4, (775, 50))
         screen.blit(planet5, (825, 250))
         screen.blit(planet6, (775, 450))
+        if len(levels_completed) == 0:
+            title.updatetitle()
+            title.drawtitle(screen)
 
         for i in levels_completed: 
             if i == 1:

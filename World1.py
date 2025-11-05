@@ -6,8 +6,9 @@ from enspaceship import EnemySpaceship
 from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
+from Lives_and_Title_text import Text
 
-def runWorld1(final, color):
+def runWorld1(final, color, s):
     #make screen properties
     WIDTH = 1100
     HEIGHT = 700
@@ -43,6 +44,9 @@ def runWorld1(final, color):
     #set starting lives
     lives = 3
 
+    #set score as given score
+    score = s
+
     #initialize font
     font = pygame.font.Font(None, 36)
 
@@ -54,6 +58,9 @@ def runWorld1(final, color):
     final1 = final
     #running checks if that level is running or not
     running = True
+
+    #create a new instance of text class
+    texts = Text()
 
     counter = 0
     ### LEVEL 1 #####################################################################
@@ -87,17 +94,11 @@ def runWorld1(final, color):
                     laser_remove.append(i)
                     enemy_remove.append(k)
                     continue
-        
-        #go through the enemy lasers and check that none of them hit our spaceship
-        for i in range(len(enemylaser)):
-            if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
-                lives -= 1
-                enemylaser_remove.append(i)
 
         # Check collisions between enemy lasers and player
         for i in range(len(enemylaser)):
             if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
-                lives -= 1
+                lives = lives - 1
                 enemylaser_remove.append(i)
                 continue
         
@@ -133,14 +134,20 @@ def runWorld1(final, color):
             enemylaser[i].update()
             enemylaser[i].draw(screen)
 
+        #draw the lives and score counter
+        texts.update_score(score)
+        texts.update_lives(lives)
+        texts.drawscore(screen)
+        texts.drawlives(screen)
+
         #update the spaceship position
         spaceship1.input(spaceship1, keys)
         spaceship1.draw(screen)
 
         #check if user is still alive or if all enemies are dead    
-        if lives == 0:
+        if lives <= 0:
             running = False
-            final1 += 1
+            final1 = 1
         elif len(enemy_spaceship) == 0:
             running = False
 
@@ -162,7 +169,7 @@ def runWorld1(final, color):
     #reset running as true
     running = True
 
-    ### LEVEL 1 CONTINUED #####################################################################
+    ### FLIPPED LEVEL 1 #####################################################################
     while running and final1 != 1:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -193,12 +200,6 @@ def runWorld1(final, color):
                     laser_remove.append(i)
                     enemy_remove.append(k)
                     continue
-        
-        #go through the enemy lasers and check that none of them hit our spaceship
-        for i in range(len(enemylaser)):
-            if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
-                lives -= 1
-                enemylaser_remove.append(i)
 
         # Check collisions between enemy lasers and player
         for i in range(len(enemylaser)):
@@ -238,12 +239,18 @@ def runWorld1(final, color):
             enemylaser[i].update()
             enemylaser[i].draw(screen)
 
+        #draw the lives and score counter
+        texts.update_score(score)
+        texts.update_lives(lives)
+        texts.drawscore(screen)
+        texts.drawlives(screen)
+
         #update the spaceship position
         spaceship1.input(spaceship1, keys)
         spaceship1.draw(screen)
 
         #check if user is still alive or if all enemies are dead    
-        if lives == 0:
+        if lives <= 0:
             running = False
             final1 = 1
         elif len(enemy_spaceship) == 0:
@@ -252,4 +259,4 @@ def runWorld1(final, color):
         pygame.display.flip()
 
         clock.tick(60)
-    return final1, lives
+    return final1, lives, score
