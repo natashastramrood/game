@@ -11,7 +11,6 @@ from World2 import runWorld2
 from EndScreen import runEndScreen
 from StartingScreen import runLevelSelectionScreen
 from SecondWorld1 import runSecondWorld1
-from InteractiveWorld1 import runInteractiveWorld1
 
 pygame.init()
 

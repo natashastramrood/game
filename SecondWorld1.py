@@ -147,6 +147,13 @@ def runSecondWorld1(final, color, s):
         texts.drawscore(screen)
         texts.drawlives(screen)
 
+        #check if it runs off the screen
+        if spaceship1.x > WIDTH or spaceship1.y > HEIGHT:
+            lives -= 1
+            score -= 150
+            spaceship1.x = WIDTH/2
+            spaceship1.y = HEIGHT/2 
+
         #update the spaceship position
         spaceship1.input(spaceship1, keys)
         spaceship1.draw(screen)
@@ -253,6 +260,13 @@ def runSecondWorld1(final, color, s):
         texts.update_lives(lives)
         texts.drawscore(screen)
         texts.drawlives(screen)
+
+        #check if it runs off the screen
+        if spaceship1.x > WIDTH or spaceship1.y > HEIGHT:
+            lives -= 1
+            score -= 150
+            spaceship1.x = WIDTH/2
+            spaceship1.y = HEIGHT/2 
 
         #update the spaceship position
         spaceship1.input(spaceship1, keys)
