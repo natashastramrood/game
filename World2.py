@@ -7,7 +7,7 @@ from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
 
-def runWorld2(final, lives):
+def runWorld2(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -20,6 +20,7 @@ def runWorld2(final, lives):
     #initialize new background for new world
     background = GroundBackground(WIDTH, HEIGHT)
     background = background.get_background()
+
 
     running = True
     ###  LEVEL 2  ##########################################################
@@ -34,4 +35,4 @@ def runWorld2(final, lives):
 
         clock.tick(60)
 
-    return final, lives
+    return final, lives, score
