@@ -6,6 +6,8 @@ from enspaceship import EnemySpaceship
 from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
+from Character import Character
+
 
 def runWorld2(final, lives, score):
 
@@ -18,8 +20,14 @@ def runWorld2(final, lives, score):
     lives = lives
 
     #initialize new background for new world
-    background = GroundBackground(WIDTH, HEIGHT)
-    background = background.get_background()
+    background1 = GroundBackground(WIDTH, HEIGHT)
+    background = background1.get_background()
+
+    ground_rects = background1.get_ground_rects()
+
+    character = Character(20, 500)
+
+    jumpcount = 0
 
 
     running = True
@@ -30,6 +38,12 @@ def runWorld2(final, lives, score):
                 running = False
                 final = 1
         screen.blit(background, (0,0))
+
+        keys = pygame.key.get_pressed()
+        jumpcount = character.input(keys, jumpcount)
+        character.update()
+        character.draw(screen)
+        character.check_collision_with_ground(ground_rects)
         
         pygame.display.flip()
 

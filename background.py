@@ -26,12 +26,10 @@ class GroundBackground():
     def __init__(self, WIDTH, HEIGHT):
         self.width = WIDTH
         self.height = HEIGHT
-        block_path = ''#get a background path
-        building_path = '' #get building pieces
         #self.sky_surface pygame.image.load(background_path)
         self.final_background = pygame.Surface((self.width, self.height))
         self.final_background.fill((175, 101, 75))
-        
+
         self.stone_path = 'images/Tiles/Tiles/Stone/tile_0004.png'
         self.stone_surface = pygame.image.load(self.stone_path)
         self.stone_surface = pygame.transform.rotozoom(self.stone_surface, 0, 2.5) 
@@ -125,6 +123,15 @@ class GroundBackground():
         self.final_background.blit(stone_spike_surface, (self.stone_width*16+15, self.height-self.stone_height*3+5))
         self.final_background.blit(stone_spike_surface, (self.stone_width*17+30, self.height-self.stone_height*3+5))
 
+        self.ground_rects = []
+        ground_height = self.stone_height*2  # or whichever layer is the topmost solid layer
+        ground_y = self.height - ground_height
+
+        # For simplicity, make the whole bottom area one long ground surface
+        self.ground_rects.append(pygame.Rect(0, ground_y, self.width, ground_height))
+
+    def get_ground_rects(self):
+        return self.ground_rects
 
 
     def get_background(self):
