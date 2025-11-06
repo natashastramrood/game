@@ -20,7 +20,7 @@ score = 0
 num_completed = 0
 levels_completed = []
 
-while num_completed <= 6 and final != 1:
+while num_completed < 6 and final != 1:
     level = 0
     final, level = runLevelSelectionScreen(levels_completed)
 
