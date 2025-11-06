@@ -60,6 +60,12 @@ class GroundBackground():
         self.final_background.blit(stone2_surface, (self.stone_width*6, self.height-6*self.stone_height))
         self.final_background.blit(stone2_surface, (self.stone_width*7, self.height-6*self.stone_height))
         self.final_background.blit(stone2_surface, (self.stone_width*8, self.height-6*self.stone_height))
+        self.final_background.blit(stone2_surface, (self.stone_width*10, self.height-self.stone_height*8))
+
+
+        self.final_background.blit(stone2_surface, (self.stone_width*13, self.height-10*self.stone_height))
+        self.final_background.blit(stone2_surface, (self.stone_width*12, self.height-10*self.stone_height))
+        self.final_background.blit(stone2_surface, (self.stone_width*11, self.height-10*self.stone_height))
 
         stone3_surface = pygame.image.load('images/Tiles/Tiles/Marble/tile_0008.png')
         stone3_surface = pygame.transform.rotozoom(stone3_surface, 0, 2.5)
@@ -71,6 +77,11 @@ class GroundBackground():
         stone4_surface = pygame.image.load('images/Tiles/Tiles/Sand/tile_0013.png')
         stone4_surface = pygame.transform.rotozoom(stone4_surface, 0, 5)
         self.final_background.blit(stone4_surface, (0, 0))
+        self.final_background.blit(stone4_surface, (self.width-8*self.stone_width, self.stone_height*2))
+        self.final_background.blit(stone4_surface, (self.width-8*self.stone_width, self.stone_height*4))
+        self.final_background.blit(stone4_surface, (self.width-10*self.stone_width, self.height - self.stone_height*4))
+        self.final_background.blit(stone4_surface, (self.width-12*self.stone_width, self.height - self.stone_height*4))
+        self.final_background.blit(stone4_surface, (self.width-10*self.stone_width, self.height - self.stone_height*6))
         self.final_background.blit(stone4_surface, (self.stone_width*2, 0))
         self.final_background.blit(stone4_surface, (0, self.stone_height*2))
         self.final_background.blit(stone4_surface, (self.width-self.stone_width*2,self.height-4*self.stone_height))
@@ -103,6 +114,16 @@ class GroundBackground():
         self.final_background.blit(stonerightbot_surface, (self.width-self.stone_width*2, self.stone_height*2))
         self.final_background.blit(stonemiddlebot_surface, (self.width-self.stone_width*4, self.stone_height*2))
         self.final_background.blit(stoneleftbot_surface, (self.width-self.stone_width*6, self.stone_height*2))
+
+
+        stone_spike_surface = pygame.image.load('images/Tiles/Tiles/Rock/tile_0008.png')
+        stone_spike_surface = pygame.transform.rotozoom(stone_spike_surface, 225, 2.5)
+        for x in range(0,3):
+            self.final_background.blit(stone_spike_surface, (self.stone_width*(6+x)+(10*x), self.height- self.stone_height*3+5))
+        self.final_background.blit(stone_spike_surface, (self.stone_width*7-10, self.height-7*self.stone_height+5))
+        self.final_background.blit(stone_spike_surface, (self.stone_width*12+35, self.height-self.stone_height*5+5))
+        self.final_background.blit(stone_spike_surface, (self.stone_width*16+15, self.height-self.stone_height*3+5))
+        self.final_background.blit(stone_spike_surface, (self.stone_width*17+30, self.height-self.stone_height*3+5))
 
 
 
