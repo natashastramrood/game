@@ -52,6 +52,20 @@ def runLevelSelectionScreen(levels_completed):
     planet6_rect = planet6.get_rect()
     planet6_rect.topleft = (775, 450)
 
+    #images for the relics obtained
+    planet1234_relic = pygame.image.load('images/PNG/Items/platformPack_item018.png')
+    planet1234_relic = pygame.transform.rotozoom(planet1234_relic, 0, 1)
+
+    planet56_relic = pygame.image.load('images/PNG/Items/platformPack_item006.png')
+    planet56_relic = pygame.transform.rotozoom(planet56_relic, 0, 1)
+
+    level1_relic = pygame.image.load('images/PNG/Items/platformPack_item003.png')
+    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item004.png')
+    level3_relic = pygame.image.load('images/PNG/Items/platformPack_item001.png')
+    level4_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
+    level5_relic = pygame.image.load('images/PNG/Items/platformPack_item007.png')
+    level6_relic = pygame.image.load('images/PNG/Items/platformPack_item002.png')
+
     checkmark_image = pygame.image.load('images/2783-200.png')
     checkmark = pygame.transform.rotozoom(checkmark_image, 0, 0.90)
     checkmark.set_alpha(200)
@@ -65,12 +79,24 @@ def runLevelSelectionScreen(levels_completed):
                 final = 1
 
         screen.blit(background2, (0,0))
+
+        #draw the planets
         screen.blit(planet1, (100, 50))
         screen.blit(planet2, (50, 250))
         screen.blit(planet3, (100, 450))
         screen.blit(planet4, (775, 50))
         screen.blit(planet5, (825, 250))
         screen.blit(planet6, (775, 450))
+
+        #draw the relic progress
+        screen.blit(planet1234_relic, (WIDTH/2-60, 20))
+        screen.blit(planet1234_relic, (WIDTH/2-100, 20))
+        screen.blit(planet1234_relic, (WIDTH/2-20, 20))
+        screen.blit(planet1234_relic, (WIDTH/2+20, 20))
+        screen.blit(planet56_relic, (WIDTH/2-140, 20))
+        screen.blit(planet56_relic, (WIDTH/2+60, 20))
+
+
         if len(levels_completed) == 0:
             title.updatetitle()
             title.drawtitle(screen)
@@ -78,16 +104,22 @@ def runLevelSelectionScreen(levels_completed):
         for i in levels_completed: 
             if i == 1:
                 screen.blit(checkmark, (118, 70))
+                screen.blit(level1_relic, (WIDTH/2-140, 20))
             elif i == 2:
                 screen.blit(checkmark, (68, 270))
+                screen.blit(level2_relic, (WIDTH/2-20, 20))
             elif i == 3:
                 screen.blit(checkmark, (118, 470))
+                screen.blit(level3_relic, (WIDTH/2-60, 20))
             elif i == 4:
                 screen.blit(checkmark, (793, 70))
+                screen.blit(level4_relic, (WIDTH/2-100, 20))
             elif i == 5:
                 screen.blit(checkmark, (843, 270))
+                screen.blit(level5_relic, (WIDTH/2+60, 20))
             elif i == 6:
                 screen.blit(checkmark, (793, 470))
+                screen.blit(level6_relic, (WIDTH/2+20, 20))
 
         #update and move spaceship
         keys = pygame.key.get_pressed()
