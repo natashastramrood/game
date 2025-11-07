@@ -104,7 +104,7 @@ def runLevelSelectionScreen(levels_completed):
         for i in levels_completed: 
             if i == 1:
                 screen.blit(checkmark, (118, 70))
-                screen.blit(level1_relic, (WIDTH/2-140, 20))
+                screen.blit(level1_relic, (WIDTH/2-100, 20))
             elif i == 2:
                 screen.blit(checkmark, (68, 270))
                 screen.blit(level2_relic, (WIDTH/2-20, 20))
@@ -113,7 +113,7 @@ def runLevelSelectionScreen(levels_completed):
                 screen.blit(level3_relic, (WIDTH/2-60, 20))
             elif i == 4:
                 screen.blit(checkmark, (793, 70))
-                screen.blit(level4_relic, (WIDTH/2-100, 20))
+                screen.blit(level4_relic, (WIDTH/2-140, 20))
             elif i == 5:
                 screen.blit(checkmark, (843, 270))
                 screen.blit(level5_relic, (WIDTH/2+60, 20))

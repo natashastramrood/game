@@ -41,7 +41,7 @@ while num_completed < 6 and final != 1:
         num_completed += 1
         levels_completed.append(3)
     if level == 4: 
-        final, lives, score = runWorld1(final, 'orange', score) # world 1
+        final, lives, score = runWorld1(final, 'red', score) # world 1
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(4)
@@ -51,7 +51,7 @@ while num_completed < 6 and final != 1:
         num_completed += 1
         levels_completed.append(5)
     if level == 6: 
-        final, lives, score = runSecondWorld1(final, 'red', score) # world 1
+        final, lives, score = runSecondWorld1(final, 'orange', score) # world 1
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(6)
