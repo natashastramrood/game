@@ -1,7 +1,7 @@
 import pygame
 
 class Character():
-    def __init__(self, x, y, xspeed = 5, yspeed = 5, ):
+    def __init__(self, x, y, xspeed = 3, yspeed = 3, ):
         self.standingimageleft = pygame.image.load('images/Characters/Final/tile_0006.png')
         self.runningimageleft = pygame.image.load('images/Characters/Final/tile_0007.png')
         self.standingimageleft = pygame.transform.rotozoom(self.standingimageleft, 0, 3)
@@ -11,10 +11,10 @@ class Character():
         self.finalsurface = self.standingimageright
         self.x = x
         self.y = y
-        self.ay = 2
+        self.ay = 1
         self.xspeed = xspeed
         self.yspeed = yspeed
-        self.gravity = 2
+        self.gravity = 1
         self.rect = self.finalsurface.get_rect()
         self.rect.center = (self.x,self.y)
         self.onGround = False
@@ -48,6 +48,9 @@ class Character():
         """Update x and y position based on speed"""
         if not self.onGround:
             self.yspeed += self.ay
+        if self.onGround:
+            self.yspeed = 0
+
         self.x += self.xspeed
         self.y += self.yspeed
         self.rect.center = (self.x, self.y) 
@@ -67,17 +70,17 @@ class Character():
     #     # Update rect position after possible correction
     #     self.rect.center = (int(self.x), int(self.y))
 
-    def check_block_collision(self, blocks):
-        counter = 0
-        for i in blocks:
-            if(i.get_rect()).colliderect(self.rect) == True:
-                self.onGround = True
-            else:
-                counter += 1
+    # def check_block_collision(self, blocks):
+    #     counter = 0
+    #     for i in blocks:
+    #         if(i.get_rect()).colliderect(self.rect) == True:
+    #             self.onGround = True
+    #         else:
+    #             counter += 1
         
-        if counter == len(blocks):
-            self.onGround = False
-
+    #     if counter == len(blocks):
+    #         self.onGround = False
+    
     def draw(self, screen_surface):
         """Draw character at his x,y on the provided surface"""
         screen_surface.blit(self.finalsurface, self.rect)
