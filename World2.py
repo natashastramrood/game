@@ -23,7 +23,7 @@ def runWorld2(final, lives, score):
     background1 = GroundBackground(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    ground_rects = background1.get_ground_rects()
+    #ground_rects = background1.get_ground_rects()
 
     character = Character(20, 500)
 
@@ -43,8 +43,9 @@ def runWorld2(final, lives, score):
         jumpcount = character.input(keys, jumpcount)
         character.update()
         character.draw(screen)
-        character.check_collision_with_ground(ground_rects)
-        
+        #character.check_collision_with_ground(ground_rects)
+        character.check_block_collision(background1.get_ground())
+
         pygame.display.flip()
 
         clock.tick(60)

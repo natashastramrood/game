@@ -11,6 +11,7 @@ class Character():
         self.finalsurface = self.standingimageright
         self.x = x
         self.y = y
+        self.ay = 2
         self.xspeed = xspeed
         self.yspeed = yspeed
         self.gravity = 2
@@ -43,52 +44,39 @@ class Character():
         self.update()
         return jumpcount
     
-    # def update(self):
-    #     """Update x and y position based on speed"""
-    #     if not self.onGround:
-    #         self.yspeed += self.gravity
-    #     self.x += self.xspeed
-    #     self.y += self.yspeed
-    #     self.rect.center = (self.x, self.y) 
+    def update(self):
+        """Update x and y position based on speed"""
+        if not self.onGround:
+            self.yspeed += self.ay
+        self.x += self.xspeed
+        self.y += self.yspeed
+        self.rect.center = (self.x, self.y) 
 
     # def check_collision_with_ground(self, ground_rects):
     #     self.onGround = False
     #     for rect in ground_rects:
     #         if self.rect.colliderect(rect):
-    #             # Snap character to top of the ground
-    #             self.y = rect.top - self.rect.height / 2
-    #             self.yspeed = 0
-    #             self.onGround = True
-    #             break
-    #     self.rect.center = (self.x, self.y)
+    #             # Only handle collision when falling or stationary
+    #             if self.yspeed >= 0:
+    #                 # Snap the bottom of the player to the top of the ground
+    #                 self.y = rect.top - self.rect.height / 2
+    #                 self.yspeed = 0
+    #                 self.onGround = True
+    #                 break
 
-    def update(self):
-        # Apply gravity always, but cap fall speed
-        self.yspeed += self.gravity
-        if self.yspeed > 10:
-            self.yspeed = 10  # prevent infinite acceleration
+    #     # Update rect position after possible correction
+    #     self.rect.center = (int(self.x), int(self.y))
 
-        # Apply movement
-        self.x += self.xspeed
-        self.y += self.yspeed
-
-        # Update rect for collision
-        self.rect.center = (int(self.x), int(self.y))
-
-    def check_collision_with_ground(self, ground_rects):
-        self.onGround = False
-        for rect in ground_rects:
-            if self.rect.colliderect(rect):
-                # Only handle collision when falling or stationary
-                if self.yspeed >= 0:
-                    # Snap the bottom of the player to the top of the ground
-                    self.y = rect.top - self.rect.height / 2
-                    self.yspeed = 0
-                    self.onGround = True
-                    break
-
-        # Update rect position after possible correction
-        self.rect.center = (int(self.x), int(self.y))
+    def check_block_collision(self, blocks):
+        counter = 0
+        for i in blocks:
+            if(i.get_rect()).colliderect(self.rect) == True:
+                self.onGround = True
+            else:
+                counter += 1
+        
+        if counter == len(blocks):
+            self.onGround = False
 
     def draw(self, screen_surface):
         """Draw character at his x,y on the provided surface"""
