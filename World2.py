@@ -25,7 +25,7 @@ def runWorld2(final, lives, score):
 
     #ground_rects = background1.get_ground_rects()
 
-    character = Character(20, 500)
+    character = Character(20, 200)
 
     jumpcount = 0
 
@@ -46,16 +46,8 @@ def runWorld2(final, lives, score):
         #character.check_block_collision(background1.get_ground())
 
         blocks = background1.get_ground()
-        counter = 0
-        for i in blocks:
-            if(i.get_rect()).colliderect(character.rect) == True:
-                character.vy = 0
-                character.onGround = True
-                counter += 1
-            
-        if len(blocks) == counter:
-            character.onGround = False
 
+        character.collisioncheck(blocks)
         character.update()
         character.draw(screen)
         
