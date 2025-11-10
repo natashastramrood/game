@@ -1,7 +1,7 @@
 import pygame
 
 class Character():
-    def __init__(self, x, y, xspeed = 3, yspeed = 3, ):
+    def __init__(self, x, y, xspeed = 3, yspeed = 3):
         self.standingimageleft = pygame.image.load('images/Characters/Final/tile_0006.png')
         self.runningimageleft = pygame.image.load('images/Characters/Final/tile_0007.png')
         self.standingimageleft = pygame.transform.rotozoom(self.standingimageleft, 0, 3)
@@ -18,6 +18,7 @@ class Character():
         self.rect = self.finalsurface.get_rect()
         self.rect.center = (self.x,self.y)
         self.onGround = False
+        self.dt = 60/1000
 
     def input(self, keys, jumpcount):
         if keys[pygame.K_d]:
@@ -34,7 +35,7 @@ class Character():
             self.onGround = False
             self.finalsurface = self.runningimageright
         if keys[pygame.K_w] != True and self.onGround != True:
-            self.yspeed = 1
+            self.yspeed = 10
             self.finalsurface = self.standingimageright
         if keys[pygame.K_w] != True and self.onGround == True:
             self.yspeed = 0
@@ -47,7 +48,7 @@ class Character():
     def update(self):
         """Update x and y position based on speed"""
         if not self.onGround:
-            self.yspeed += self.ay
+            self.yspeed = (-1)*(self.yspeed*self.dt*1000/50) + (9.81*1000/50)*self.dt
         if self.onGround:
             self.yspeed = 0
 
