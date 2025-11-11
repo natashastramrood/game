@@ -39,16 +39,15 @@ def runWorld2(final, lives, score):
                 final = 1
         screen.blit(background, (0,0))
 
-        keys = pygame.key.get_pressed()
-        jumpcount = character.input(keys, jumpcount)
-
         #character.check_collision_with_ground(ground_rects)
         #character.check_block_collision(background1.get_ground())
 
         blocks = background1.get_ground()
 
-        character.collisioncheck(blocks)
-        character.update()
+        keys = pygame.key.get_pressed()
+        jumpcount = character.input(keys, jumpcount, blocks)
+
+        character.update(blocks)
         character.draw(screen)
         
         pygame.display.flip()

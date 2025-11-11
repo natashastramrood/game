@@ -20,7 +20,7 @@ class Tile(pygame.sprite.Sprite):
         return self.stone_surface.get_height()
     
     def get_rect(self):
-        return self.stone_surface.get_rect()
+        return self.get_rect()
 
 class GroundBlock(Tile):
     def __init__(self, x, y):

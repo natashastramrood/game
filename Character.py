@@ -50,7 +50,7 @@ class Character():
     #     self.update()
     #     return jumpcount
     
-    def input(self, keys, jumpcount):
+    def input(self, keys, jumpcount, blocks):
         #check input and adjust position and speed based on keys being pressed
         if keys[pygame.K_d]:
             self.xspeed = 5
@@ -77,7 +77,7 @@ class Character():
         if jumpcount == 2 and self.onGround == True:
             jumpcount = 0
             
-        self.update()
+        self.update(blocks)
         return jumpcount
     
     # def update(self):
@@ -93,15 +93,15 @@ class Character():
     #     self.y += self.yspeed
     #     self.rect.center = (self.x, self.y) 
 
-    def update(self):
-        #check if the character is on the ground, and if they aren't then add gravity to their y position
-        if not self.onGround:
-            self.yspeed += self.gravity 
+    # def update(self):
+    #     #check if the character is on the ground, and if they aren't then add gravity to their y position
+    #     if not self.onGround:
+    #         self.yspeed += self.gravity 
 
-        #update position based on x and y speed
-        self.x += self.xspeed
-        self.y += self.yspeed
-        self.rect.center = (self.x, self.y)
+    #     #update position based on x and y speed
+    #     self.x += self.xspeed
+    #     self.y += self.yspeed
+    #     self.rect.center = (self.x, self.y)
 
     def collisioncheck(self, blocks):
         self.onGround = False
@@ -116,8 +116,68 @@ class Character():
                     self.yspeed = 0
                     self.onGround = True
 
-                # If you want to add collision from below (head bonk), you'd need
-                # another check (e.g., self.yspeed < 0) and resolution logic here.
+    def update(self, blocks):
+        #set gravity
+        if not self.onGround:
+            self.yspeed += self.gravity 
+
+        # vertical collision check/position
+        self.y += self.yspeed
+        self.rect.centery = self.y
+        self.vertical_collisioncheck(blocks)
+
+
+        #horizontal collision check/position
+        self.x += self.xspeed
+        self.rect.centerx = self.x
+        self.horizontal_collisioncheck(blocks)
+
+        #set the final rect position
+        self.x = self.rect.centerx
+        self.y = self.rect.centery
+
+    def vertical_collisioncheck(self, blocks):
+        self.onGround = False
+        for block in blocks:
+            # Check for collision
+            if self.rect.colliderect(block.rect): 
+                # Block.get_rect() is inconsistent, use .rect if possible.
+                # I've updated your Blocks to use .rect (see section 3)
+
+                # Collision from ABOVE (Landing)
+                if self.yspeed > 0: 
+                    # Snap character to the top of the block
+                    self.rect.bottom = block.rect.top
+                    self.y = self.rect.centery
+                    self.yspeed = 0
+                    self.onGround = True
+                
+                # Collision from BELOW (Hitting head)
+                elif self.yspeed < 0:
+                    # Snap character to the bottom of the block
+                    self.rect.top = block.rect.bottom
+                    self.y = self.rect.centery
+                    self.yspeed = 0
+
+    def horizontal_collisioncheck(self, blocks):
+        for block in blocks:
+            # Check for collision
+            if self.rect.colliderect(block.rect):
+                
+                # Collision from the RIGHT (Running LEFT)
+                if self.xspeed < 0:
+                    # Snap character to the right side of the block
+                    self.rect.left = block.rect.right
+                    self.x = self.rect.centerx
+                    self.xspeed = 0 # Stop horizontal movement
+                    
+                # Collision from the LEFT (Running RIGHT)
+                elif self.xspeed > 0:
+                    # Snap character to the left side of the block
+                    self.rect.right = block.rect.left
+                    self.x = self.rect.centerx
+                    self.xspeed = 0 # Stop horizontal movement
+
 
     # def collisioncheck(self, blocks):
     #     counter = 0
