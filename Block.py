@@ -6,12 +6,10 @@ class Tile(pygame.sprite.Sprite):
         super().__init__()
         self.image = pygame.image.load('images/Tiles/Tiles/Stone/tile_0004.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 2.5) 
-
-        self.rect = self.image.get_rect() 
+        self.rect = self.stone_surface.get_rect() 
         self.rect.x = x
         self.rect.y = y
-
-
+        
         self.type = tile_type 
 
     def get_width(self):
@@ -21,7 +19,7 @@ class Tile(pygame.sprite.Sprite):
         return self.stone_surface.get_height()
     
     def get_rect(self):
-        return self.get_rect()
+        return self.rect
 
 class GroundBlock(Tile):
     def __init__(self, x, y):
@@ -33,7 +31,7 @@ class Sand(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0012.png')
         self.stone_surface = pygame.transform.rotozoom(self.stone_surface, 0, 2.5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -44,7 +42,7 @@ class Marble(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Marble/tile_0008.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 2.5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -59,7 +57,7 @@ class bigMarble(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Marble/tile_0008.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 4.5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -74,7 +72,7 @@ class bigSand(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0013.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -89,7 +87,7 @@ class leftSand(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0033.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -100,7 +98,7 @@ class middleSand(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0034.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -111,7 +109,7 @@ class rightSand(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0035.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -122,7 +120,7 @@ class leftSandBot(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0051.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -133,7 +131,7 @@ class middleSandBot(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0052.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -144,7 +142,7 @@ class rightSandBot(Tile):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Sand/tile_0053.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 0, 5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
@@ -152,12 +150,12 @@ class rightSandBot(Tile):
 
 class Spike(Tile):
     def __init__(self, x, y):
-        super().__init__(x, y, tile_type = 'GROUND')
+        super().__init__(x, y, tile_type = 'SPIKE')
         self.image = pygame.image.load('images/Tiles/Tiles/Rock/tile_0008.png')
         self.stone_surface = pygame.transform.rotozoom(self.image, 225, 2.5)
-        self.rect = self.image.get_rect()
+        self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
-        tile_type = 'GROUND'
+        tile_type = 'SPIKE'
         self.type = tile_type
 

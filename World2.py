@@ -33,6 +33,7 @@ def runWorld2(final, lives, score):
     laser_remove = []
     enemy = []
     enemy_remove = []
+    level1_relic = pygame.image.load('images/PNG/Items/platformPack_item003.png')
 
     running = True
     ###  LEVEL 2  ##########################################################
@@ -66,6 +67,12 @@ def runWorld2(final, lives, score):
                     score += 100
                     continue
             laser[i].draw(screen)
+
+        #blit the relic
+        if (character.rect).colliderect(level1_relic.get_rect()) != True:
+            screen.blit(level1_relic, (1050,600))
+        elif (character.rect).colliderect(level1_relic.get_rect()) == True: 
+            running = False
 
 
         character.update(blocks)
