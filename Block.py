@@ -1,15 +1,15 @@
 import pygame
 
 class Tile(pygame.sprite.Sprite):
-    def __init__(self, x, y, tile_type="GROUND"):
+    def __init__(self, x, y, scale = 2.5, tile_type="GROUND"):
         # Initialize the base sprite class
         super().__init__()
         self.image = pygame.image.load('images/Tiles/Tiles/Stone/tile_0004.png')
-        self.stone_surface = pygame.transform.rotozoom(self.image, 0, 2.5) 
+        self.stone_surface = pygame.transform.rotozoom(self.image, 0, scale) 
         self.rect = self.stone_surface.get_rect() 
         self.rect.x = x
         self.rect.y = y
-        
+
         self.type = tile_type 
 
     def get_width(self):
@@ -53,19 +53,15 @@ class Marble(Tile):
         self.rect = self.stone_surface.get_rect()
 
 class bigMarble(Tile):
-    def __init__(self, x, y):
+    def __init__(self, x, y, roto):
         super().__init__(x, y, tile_type = 'GROUND')
         self.image = pygame.image.load('images/Tiles/Tiles/Marble/tile_0008.png')
-        self.stone_surface = pygame.transform.rotozoom(self.image, 0, 4.5)
+        self.stone_surface = pygame.transform.rotozoom(self.image, roto, 4.5)
         self.rect = self.stone_surface.get_rect()
         self.rect.x = x
         self.rect.y = y
         tile_type = 'GROUND'
         self.type = tile_type
-
-    def rotate(self, roto):
-        self.stone_surface = pygame.transform.rotozoom(self.stone_surface, roto, 1)
-        self.rect = self.stone_surface.get_rect()
 
 class bigSand(Tile):
     def __init__(self, x, y):
@@ -148,14 +144,4 @@ class rightSandBot(Tile):
         tile_type = 'GROUND'
         self.type = tile_type
 
-class Spike(Tile):
-    def __init__(self, x, y):
-        super().__init__(x, y, tile_type = 'SPIKE')
-        self.image = pygame.image.load('images/Tiles/Tiles/Rock/tile_0008.png')
-        self.stone_surface = pygame.transform.rotozoom(self.image, 225, 2.5)
-        self.rect = self.stone_surface.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-        tile_type = 'SPIKE'
-        self.type = tile_type
 

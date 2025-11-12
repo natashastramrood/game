@@ -100,7 +100,6 @@ def runWorld1(final, color, s):
         for i in range(len(enemylaser)):
             if enemylaser[i].get_rect().colliderect(spaceship1.get_rect()):
                 lives = lives - 1
-                hit = True
                 score -= 20
                 enemylaser_remove.append(i)
                 continue

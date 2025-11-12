@@ -91,10 +91,8 @@ class GroundBackground():
         self.blocks.append(bigSand(self.width-self.stone_width*2,self.height-4*self.stone_height))
 
         stone3_surface = pygame.transform.rotozoom(stone3_surface, 0, 2)
-        self.blocks.append(bigMarble(self.width-self.stone_width*4,self.height-4*self.stone_height))
-        bigmarble = bigMarble(self.stone_width*2, self.stone_height*2)
-        bigmarble.rotate(270)
-        self.blocks.append(bigmarble)
+        self.blocks.append(bigMarble(self.width-self.stone_width*4+10,self.height-4*self.stone_height+10, 90))
+        self.blocks.append(bigMarble(self.stone_width*2-5, self.stone_height*2, 270))
 
         # stoneleft_surface = pygame.image.load('images/Tiles/Tiles/Sand/tile_0033.png')
         # stoneleft_surface = pygame.transform.rotozoom(stoneleft_surface, 0, 5)
@@ -120,20 +118,6 @@ class GroundBackground():
         # stonerightbot_surface = pygame.transform.rotozoom(stonerightbot_surface, 0, 5)
         self.blocks.append(rightSandBot(self.width-self.stone_width*2, self.stone_height*2))
 
-        # self.final_background.blit(stonerightbot_surface, (self.width-self.stone_width*2, self.stone_height*2))
-        # self.final_background.blit(stonemiddlebot_surface, (self.width-self.stone_width*4, self.stone_height*2))
-        # self.final_background.blit(stoneleftbot_surface, (self.width-self.stone_width*6, self.stone_height*2))
-
-
-        stone_spike_surface = pygame.image.load('images/Tiles/Tiles/Rock/tile_0008.png')
-        stone_spike_surface = pygame.transform.rotozoom(stone_spike_surface, 225, 2.5)
-        for x in range(0,3):
-            self.blocks.append(Spike(self.stone_width*(6+x)+(10*x), self.height- self.stone_height*3+5))
-            #self.final_background.blit(stone_spike_surface, (self.stone_width*(6+x)+(10*x), self.height- self.stone_height*3+5))
-        self.blocks.append(Spike(self.stone_width*7-10, self.height-7*self.stone_height+5))
-        self.blocks.append(Spike(self.stone_width*12+35, self.height-self.stone_height*5+5))
-        self.blocks.append(Spike(self.stone_width*16+15, self.height-self.stone_height*3+5))
-        self.blocks.append(Spike(self.stone_width*17+30, self.height-self.stone_height*3+5))
 
         self.ground_rects = []
         ground_height = self.stone_height*2  # or whichever layer is the topmost solid layer
@@ -151,5 +135,75 @@ class GroundBackground():
 
     def get_background(self):
         return self.final_background
+    
+
+class GroundBackground2():
+    def __init__(self, WIDTH, HEIGHT):
+        self.width = WIDTH
+        self.height = HEIGHT
+        self.final_background = pygame.Surface((self.width, self.height))
+        self.final_background.fill((175, 101, 75))
+
+        #get standard stone images/sizes
+        self.stone_path = 'images/Tiles/Tiles/Stone/tile_0004.png'
+        self.stone_surface = pygame.image.load(self.stone_path)
+        self.stone_surface = pygame.transform.rotozoom(self.stone_surface, 0, 2.5) 
+        self.stone_width = self.stone_surface.get_width()
+        self.stone_height = self.stone_surface.get_height()
+
+        self.blocks = []
+
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(x, self.height-self.stone_height))
+            self.blocks.append(Tile(x, self.height-2*self.stone_height))
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(0, x))
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(x,0))
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(self.width-self.stone_width, x))
+
+        for x in range(1, 5):
+            self.blocks.append(Tile(self.stone_width*(6+x), self.height-self.stone_height*5))
+
+        for x in range(1, 4):
+            self.blocks.append(Tile(self.stone_width*(x), self.height-self.stone_height*8))
+        for x in range(1, 4):
+            self.blocks.append(Tile(self.stone_width*(7+x), self.height-self.stone_height*10))
+
+        for x in range(1, 11):
+            self.blocks.append(Tile(self.stone_width*11, self.height-self.stone_height*(2+x)))
+
+        for x in range(1, 10):
+            self.blocks.append(Tile(self.stone_width*(11+x), self.height-self.stone_height*(12)))
+
+        for x in range(1, 8):
+            self.blocks.append(Tile(self.stone_width*(20), self.height-self.stone_height*(12-x)))
+
+        for x in range(1, 7):
+            self.blocks.append(Tile(self.stone_width*(20-x), self.height-self.stone_height*(5)))
+
+        for x in range(1, 5):
+            self.blocks.append(Tile(self.stone_width*(14), self.height-self.stone_height*(5+x)))
+
+        self.blocks.append(Tile(self.stone_width*(13.6), self.height-self.stone_height*(7), 1))
+
+        for x in range(1, 4):
+            self.blocks.append(Tile(self.stone_width*(14+x), self.height-self.stone_height*(9)))
+
+
+        for i in self.blocks: 
+            self.final_background.blit(i.stone_surface, (i.rect.x, i.rect.y))
+
+        print(self.stone_width, self.stone_height)
+
+
+    def get_ground(self):
+        return self.blocks
+
+    def get_background(self):
+        return self.final_background
+    
+
 
         

@@ -1,5 +1,5 @@
 import pygame
-from background import SpaceBackground, GroundBackground
+from background import SpaceBackground, GroundBackground2
 from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
@@ -11,7 +11,7 @@ from groundenemy import GroundEnemy
 from Lives_and_Title_text import Text
 
 
-def runWorld2(final, lives, score):
+def runonGround2(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -24,25 +24,26 @@ def runWorld2(final, lives, score):
     lives = lives
 
     #initialize new background for new world
-    background1 = GroundBackground(WIDTH, HEIGHT)
+    background1 = GroundBackground2(WIDTH, HEIGHT)
     background = background1.get_background()
 
     #ground_rects = background1.get_ground_rects()
 
-    character = Character(20, 400)
+    character = Character(100, 550)
 
     jumpcount = 0
     laser = []
     counter = 0
     laser_remove = []
-    enemy = [GroundEnemy(525, 225, 70),
-             GroundEnemy(300, 500, 80),
-             GroundEnemy(450, 587, 50)]
+    enemy = [GroundEnemy(700, 135, 170, 'left', 0, 1.5),
+             GroundEnemy(90, HEIGHT-(9*45)+20, 60, 'right'), 
+             GroundEnemy(685, (6*45), 85),
+             GroundEnemy(700, HEIGHT - 115, 160, 'right')]
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
-    level1_relic = pygame.image.load('images/PNG/Items/platformPack_item003.png')
-    relic_rect = level1_relic.get_rect(topleft=(1025, 450))
+    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item004.png')
+    relic_rect = level2_relic.get_rect(topleft=(675, 400))
     texts = Text()
 
     running = True
@@ -72,7 +73,10 @@ def runWorld2(final, lives, score):
         for i in range(len(enemy)):
             #check if enemy is ready to shoot
             if enemy[i].ready_to_shoot() == True :
-                enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, 7, 180))
+                if enemy[i].direction == 'left':
+                    enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, 7, 180))
+                elif enemy[i].direction == 'right':
+                    enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, -7, 180))
             enemy[i].update()
             enemy[i].draw(screen)
 
@@ -91,10 +95,7 @@ def runWorld2(final, lives, score):
             if enemy[i].get_rect().colliderect(character.rect):
                 lives -= 1
                 score -= 20
-                if character.x-100 >= 20:
-                    character.x = character.x-100
-                else:
-                    character.x = 20
+                character.x = character.x-100
                 continue
 
         #remove enemies and lasers that are intersecting
@@ -138,7 +139,7 @@ def runWorld2(final, lives, score):
 
         #blit the relic
         if (character.rect).colliderect(relic_rect) != True:
-            screen.blit(level1_relic, (1025,450))
+            screen.blit(level2_relic, (675,400))
         if (character.rect).colliderect(relic_rect): 
             running = False
 

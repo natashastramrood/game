@@ -67,18 +67,6 @@ class Character():
     #     self.y += self.yspeed
     #     self.rect.center = (self.x, self.y)
 
-    def collisioncheck(self, blocks):
-        self.onGround = False
-        #iterate through each block in the blocks list and check if they are colliding with the user
-        for block in blocks:
-            if self.rect.colliderect(block.get_rect()):
-                #check if character was falling
-                if self.yspeed > 0:
-                    #snap the character to the top of the block they are intersecting with
-                    self.rect.bottom = block.get_rect().top
-                    self.y = self.rect.centery
-                    self.yspeed = 0
-                    self.onGround = True
 
     def update(self, blocks):
         #set gravity
@@ -92,7 +80,8 @@ class Character():
 
 
         #horizontal collision check/position
-        self.x += self.xspeed
+        if (self.x+self.xspeed-15) >= 0 or self.xspeed > 0:
+            self.x += self.xspeed
         self.rect.centerx = self.x
         self.horizontal_collisioncheck(blocks)
 
@@ -127,7 +116,6 @@ class Character():
         for block in blocks:
             # Check for collision
             if self.rect.colliderect(block.rect):
-                
                 # Collision from the RIGHT (Running LEFT)
                 if self.xspeed < 0:
                     # Snap character to the right side of the block

@@ -11,6 +11,7 @@ from World2 import runWorld2
 from EndScreen import runEndScreen
 from StartingScreen import runLevelSelectionScreen
 from SecondWorld1 import runSecondWorld1
+from OnGround2 import runonGround2
 
 pygame.init()
 
@@ -25,33 +26,34 @@ while num_completed < 6 and final != 1:
     final, level = runLevelSelectionScreen(levels_completed)
 
     if level == 1:
-        #final, lives, score = runSecondWorld1(final, 'green', score) # world 1
+        final, lives, score = runSecondWorld1(final, 'green', score) # space world
         final, lives, score = runWorld2(final, lives, score) 
         # final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(1)
     if level == 2: 
-        final, lives, score = runWorld1(final, 'red', score) # world 1
+        final, lives, score = runWorld1(final, 'red', score) # space world
+        final, lives, score = runonGround2(final, lives, score)
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(2)
     if level == 3: 
-        final, lives, score = runWorld1(final, 'blue', score) # world 1
+        final, lives, score = runWorld1(final, 'blue', score) # space world
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(3)
     if level == 4: 
-        final, lives, score = runWorld1(final, 'red', score) # world 1
+        final, lives, score = runWorld1(final, 'red', score) # space world
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(4)
     if level == 5: 
-        final, lives, score = runSecondWorld1(final, 'blue', score) # world 1
+        final, lives, score = runSecondWorld1(final, 'blue', score) # space world
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(5)
     if level == 6: 
-        final, lives, score = runSecondWorld1(final, 'orange', score) # world 1
+        final, lives, score = runSecondWorld1(final, 'orange', score) # space world
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(6)
