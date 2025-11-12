@@ -7,6 +7,7 @@ from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
 from Character import Character
+from groundenemy import GroundEnemy
 
 
 def runWorld2(final, lives, score):
@@ -31,7 +32,7 @@ def runWorld2(final, lives, score):
     laser = []
     counter = 0
     laser_remove = []
-    enemy = []
+    enemy = [GroundEnemy(400, 400)]
     enemy_remove = []
     level1_relic = pygame.image.load('images/PNG/Items/platformPack_item003.png')
     relic_rect = level1_relic.get_rect(topleft=(1025, 450))
@@ -68,6 +69,10 @@ def runWorld2(final, lives, score):
                     score += 100
                     continue
             laser[i].draw(screen)
+
+        for i in range(len(enemy)):
+            enemy[i].update()
+            enemy[i].draw(screen)
 
         #blit the relic
         if (character.rect).colliderect(relic_rect) != True:

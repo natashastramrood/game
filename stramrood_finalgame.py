@@ -25,9 +25,9 @@ while num_completed < 6 and final != 1:
     final, level = runLevelSelectionScreen(levels_completed)
 
     if level == 1:
-        final, lives, score = runWorld2(final, lives, score) 
         #final, lives, score = runSecondWorld1(final, 'green', score) # world 1
-        # final, lives = runWorld2(final, lives) # worldd 2 
+        final, lives, score = runWorld2(final, lives, score) 
+        # final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(1)
     if level == 2: 
