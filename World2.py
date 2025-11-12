@@ -34,6 +34,7 @@ def runWorld2(final, lives, score):
     enemy = []
     enemy_remove = []
     level1_relic = pygame.image.load('images/PNG/Items/platformPack_item003.png')
+    relic_rect = level1_relic.get_rect(topleft=(1025, 450))
 
     running = True
     ###  LEVEL 2  ##########################################################
@@ -69,9 +70,9 @@ def runWorld2(final, lives, score):
             laser[i].draw(screen)
 
         #blit the relic
-        if (character.rect).colliderect(level1_relic.get_rect()) != True:
-            screen.blit(level1_relic, (1050,600))
-        elif (character.rect).colliderect(level1_relic.get_rect()) == True: 
+        if (character.rect).colliderect(relic_rect) != True:
+            screen.blit(level1_relic, (1025,450))
+        if (character.rect).colliderect(relic_rect): 
             running = False
 
 
@@ -81,6 +82,5 @@ def runWorld2(final, lives, score):
         pygame.display.flip()
 
         clock.tick(60)
-
 
     return final, lives, score
