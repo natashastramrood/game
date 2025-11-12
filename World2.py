@@ -25,10 +25,14 @@ def runWorld2(final, lives, score):
 
     #ground_rects = background1.get_ground_rects()
 
-    character = Character(20, 200)
+    character = Character(20, 400)
 
     jumpcount = 0
-
+    laser = []
+    counter = 0
+    laser_remove = []
+    enemy = []
+    enemy_remove = []
 
     running = True
     ###  LEVEL 2  ##########################################################
@@ -45,7 +49,24 @@ def runWorld2(final, lives, score):
         blocks = background1.get_ground()
 
         keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            if counter > 20:
+                laser.append(Laser(character.x, character.y, 7, 7, character.roto))
+                counter = 0
+            counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
+
+        #update the lasers
+        for i in range(len(laser)):
+            laser[i].update()
+            for j in range(len(enemy)):
+                if(laser[i].get_rect()).colliderect(enemy[j].get_rect()) == True:
+                    laser_remove.append(i)
+                    enemy_remove.append(j)
+                    score += 100
+                    continue
+            laser[i].draw(screen)
+
 
         character.update(blocks)
         character.draw(screen)

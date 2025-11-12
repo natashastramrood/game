@@ -11,6 +11,7 @@ class Tile(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
+
         self.type = tile_type 
 
     def get_width(self):
@@ -51,6 +52,7 @@ class Marble(Tile):
 
     def rotate(self, roto):
         self.stone_surface = pygame.transform.rotozoom(self.stone_surface, roto, 1)
+        self.rect = self.stone_surface.get_rect()
 
 class bigMarble(Tile):
     def __init__(self, x, y):
@@ -65,6 +67,7 @@ class bigMarble(Tile):
 
     def rotate(self, roto):
         self.stone_surface = pygame.transform.rotozoom(self.stone_surface, roto, 1)
+        self.rect = self.stone_surface.get_rect()
 
 class bigSand(Tile):
     def __init__(self, x, y):
@@ -79,6 +82,7 @@ class bigSand(Tile):
 
     def rotate(self, roto):
         self.stone_surface = pygame.transform.rotozoom(self.stone_surface, roto, 1)
+        self.rect = self.stone_surface.get_rect()
 
 class leftSand(Tile):
     def __init__(self, x, y):

@@ -17,38 +17,15 @@ class Character():
         self.x = x
         self.y = y
         self.ay = 1
+        self.roto = 0
         self.xspeed = xspeed
         self.yspeed = yspeed
-        self.gravity = 50/1000
+        self.gravity = 100/1000
         self.rect = self.finalsurface.get_rect()
         self.rect.center = (self.x,self.y)
         self.onGround = False
         self.dt = 60/1000
 
-    # def input(self, keys, jumpcount):
-    #     if keys[pygame.K_d]:
-    #         self.xspeed = 5
-    #         self.finalsurface = self.runningimageright
-    #     if keys[pygame.K_a]:
-    #         self.xspeed = -5
-    #         self.finalsurface = self.runningimageleft
-    #     if keys[pygame.K_d] != True and keys[pygame.K_a] != True: 
-    #         self.xspeed = 0
-    #         self.finalsurface = self.standingimageright
-    #     if keys[pygame.K_w] and jumpcount < 2:
-    #         self.yspeed = -5
-    #         self.onGround = False
-    #         self.finalsurface = self.runningimageright
-    #     if keys[pygame.K_w] != True and self.onGround != True:
-    #         self.yspeed = 10
-    #         self.finalsurface = self.standingimageright
-    #     if keys[pygame.K_w] != True and self.onGround == True:
-    #         self.yspeed = 0
-    #         self.finalsurface = self.standingimageright
-    #     if jumpcount == 2 and self.onGround == True:
-    #         jumpcount = 0
-    #     self.update()
-    #     return jumpcount
     
     def input(self, keys, jumpcount, blocks):
         #check input and adjust position and speed based on keys being pressed
@@ -79,19 +56,6 @@ class Character():
             
         self.update(blocks)
         return jumpcount
-    
-    # def update(self):
-    #     """Update x and y position based on speed"""
-    #     if self.onGround == False:
-    #         self.yspeed = (-1)*(self.yspeed*self.dt*1000/50) + (9.81*1000/50)*self.dt
-    #     if self.onGround:
-    #         self.yspeed = 0
-    #     if self.y == 600:
-    #         self.yspeed = 0
-
-    #     self.x += self.xspeed
-    #     self.y += self.yspeed
-    #     self.rect.center = (self.x, self.y) 
 
     # def update(self):
     #     #check if the character is on the ground, and if they aren't then add gravity to their y position

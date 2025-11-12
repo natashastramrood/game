@@ -76,7 +76,7 @@ def runWorld1(final, color, s):
         #draw spaceship character
         keys = pygame.key.get_pressed()
         if keys[pygame.K_SPACE]:
-            if counter > 10:
+            if counter > 20:
                 laser.append(Laser(spaceship1.x, spaceship1.y, 7, 7, spaceship1.roto))
                 counter = 0
             counter += 1
