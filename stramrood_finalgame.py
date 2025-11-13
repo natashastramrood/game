@@ -12,6 +12,7 @@ from EndScreen import runEndScreen
 from StartingScreen import runLevelSelectionScreen
 from SecondWorld1 import runSecondWorld1
 from OnGround2 import runonGround2
+from OnGround3 import runonGround3
 
 pygame.init()
 
@@ -38,7 +39,8 @@ while num_completed < 6 and final != 1:
         num_completed += 1
         levels_completed.append(2)
     if level == 3: 
-        final, lives, score = runWorld1(final, 'blue', score) # space world
+        #final, lives, score = runWorld1(final, 'blue', score) # space world
+        final, lives, score = runonGround3(final, lives, score)
         #final, lives = runWorld2(final, lives) # world 2 
         num_completed += 1
         levels_completed.append(3)

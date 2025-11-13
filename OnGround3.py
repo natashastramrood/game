@@ -1,5 +1,5 @@
 import pygame
-from background import SpaceBackground, GroundBackground2
+from background import SpaceBackground, GroundBackground3
 from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
@@ -11,7 +11,7 @@ from groundenemy import GroundEnemy
 from Lives_and_Title_text import Text
 
 
-def runonGround2(final, lives, score):
+def runonGround3(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -24,26 +24,38 @@ def runonGround2(final, lives, score):
     lives = lives
 
     #initialize new background for new world
-    background1 = GroundBackground2(WIDTH, HEIGHT)
+    background1 = GroundBackground3(WIDTH, HEIGHT)
     background = background1.get_background()
 
     #ground_rects = background1.get_ground_rects()
 
     character = Character(100, 550)
 
+    #initialize variables
     jumpcount = 0
-    laser = []
     counter = 0
+    #make all lists to store current class objects and objects being deleted
+    laser = []
     laser_remove = []
-    enemy = [GroundEnemy(700, 135, 170, 'left', 0, 1.5),
-             GroundEnemy(90, HEIGHT-(9*45)+20, 60, 'right'), 
-             GroundEnemy(685, (6*45), 85),
-             GroundEnemy(700, HEIGHT - 115, 160, 'right')]
+    enemy = [GroundEnemy(45*10, HEIGHT - 112, 145),
+             GroundEnemy(45*2, 45*5+20, 70, 'right'),
+             GroundEnemy(45*13, 45*5+20, 100, 'right', 0, 1.5)]
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
-    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item004.png')
-    relic_rect = level2_relic.get_rect(topleft=(675, 400))
+    #load up images to blit
+    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item001.png')
+    relic_rect = level2_relic.get_rect(topleft=(990, 50))
+    #initialize water and variables for water
+    water_image = pygame.image.load('images/Tiles/Tiles/Water/background_terrain_top.png')
+    water_image = pygame.transform.rotozoom(water_image, 0, 0.95)
+    water_image2 = pygame.transform.rotozoom(water_image, 0, 0.93)
+    rect_size = (60, 60)
+    water_color = (175,203,211)
+    rect_surface = pygame.Surface(rect_size)
+    rect_surface.fill(water_color)
+
+    #initialize texts
     texts = Text()
 
     running = True
@@ -95,10 +107,21 @@ def runonGround2(final, lives, score):
             if enemy[i].get_rect().colliderect(character.rect):
                 lives -= 1
                 score -= 20
-                if character.x-100 >= 20:
-                    character.x = character.x-100
+                if character.x - 100 >=(60*(4)-15) and character.x-100 <= (60*(6)-15):
+                    character.x = 60
+                    character.y = HEIGHT - (45*3 +25)
+                elif character.x - 100 >= (53*(12)-5) and character.x - 100 <= (53*(16)-10):
+                    character.x = 60
+                    character.y = HEIGHT - (45*3 +25)
+                elif character.x-100 >= 60:
+                    if character.direction == 'right':
+                        character.x = character.x-100
+                        character.y = HEIGHT - (45*3 +25)
+                    elif character.direction == 'left':
+                        character.x = character.x+100
+                        character.y = HEIGHT - (45*3 +25)
                 else:
-                    character.x = 20
+                    character.x = 60
                 continue
 
         #remove enemies and lasers that are intersecting
@@ -111,17 +134,20 @@ def runonGround2(final, lives, score):
             if 0 <= i < len(laser):
                 laser.pop(i)
         laser_remove.clear()
+
         #remove enemies that get hit
         for k in sorted(enemy_remove, reverse=True):
             if 0 <= k < len(enemy):
                 enemy.pop(k)
         enemy_remove.clear()
+
         #remove enemy laser that intersect with character
         for j in sorted(enemylaser_remove, reverse=True):
             if 0 <= j < len(enemylaser):
                 enemylaser.pop(j)
         enemylaser_remove.clear()
 
+        #draw text files on the screen
         texts.update_score(score)
         texts.update_lives(lives)
         texts.drawscore(screen)
@@ -140,14 +166,35 @@ def runonGround2(final, lives, score):
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
-        #blit the relic
+        #blit the relic and check for collisions to see if they pass the level
         if (character.rect).colliderect(relic_rect) != True:
-            screen.blit(level2_relic, (675,400))
+            screen.blit(level2_relic, (990,50))
         if (character.rect).colliderect(relic_rect): 
             running = False
 
+        #update the character and blit the character onto the screen
         character.update(blocks)
         character.draw(screen)
+
+        #blit the water on the screen
+        for i in range(1, 4):
+            screen.blit(rect_surface, (60*(3+i)-15, HEIGHT - 45))
+            screen.blit(water_image, (60*(3+i)-15, HEIGHT - 2*45))
+
+        for i in range(1, 6):
+            screen.blit(water_image2, (53*(11+i)-5, HEIGHT - 2*45))
+            if i != 5:
+                screen.blit(rect_surface, (53*(11+i)-5, HEIGHT - 45))
+        
+        screen.blit(rect_surface, (53*(16)-10, HEIGHT - 45))
+
+
+
+        #check if the character has fallen off the screen
+        if character.y > 700:
+            character.x = 100
+            character.y = 550
+            lives -= 1
 
         if lives <= 0:
             running = False
