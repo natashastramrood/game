@@ -131,7 +131,7 @@ def runWorld2(final, lives, score):
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
                 elif character.direction == 'left':
-                    laser.append(Laser(character.x, character.y, -7, 7, character.roto))
+                    laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)

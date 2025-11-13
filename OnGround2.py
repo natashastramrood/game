@@ -76,7 +76,7 @@ def runonGround2(final, lives, score):
                 if enemy[i].direction == 'left':
                     enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, 7, 180))
                 elif enemy[i].direction == 'right':
-                    enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, -7, 180))
+                    enemylaser.append(EnemyLaser(enemy[i].x, enemy[i].y, -7, 0))
             enemy[i].update()
             enemy[i].draw(screen)
 
@@ -135,7 +135,7 @@ def runonGround2(final, lives, score):
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
                 elif character.direction == 'left':
-                    laser.append(Laser(character.x, character.y, -7, 7, character.roto))
+                    laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)

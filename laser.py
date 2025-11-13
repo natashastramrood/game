@@ -3,7 +3,7 @@ from math import cos, sin, radians
 class Laser():
     def __init__(self, x, y, xspeed, yspeed, roto):
         self.image = pygame.image.load('images/Space/PNG/Lasers/laserBlue01.png')
-        self.surface = pygame.transform.rotozoom(self.image, roto+270, 0.4) # rotate the image
+        self.surface = pygame.transform.rotozoom(self.image, roto+270, 0.8) # rotate the image
         self.x = x
         self.y = y
         self.roto = roto-180
