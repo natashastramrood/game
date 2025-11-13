@@ -37,7 +37,10 @@ def runonGround4(final, lives, score):
     #make all lists to store current class objects and objects being deleted
     laser = []
     laser_remove = []
-    enemy = []
+    enemy = [GroundEnemy(45*2, 45*3, 180, 'right'),
+             GroundEnemy(45*5+15, 45*6, 130),
+             GroundEnemy(45*14, 45*4, 270),
+             GroundEnemy(45*18+20, 45*10, 140, "right")]
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
