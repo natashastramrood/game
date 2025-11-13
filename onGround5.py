@@ -1,5 +1,5 @@
 import pygame
-from background import SpaceBackground, GroundBackground4
+from background import SpaceBackground, GroundBackground5
 from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
@@ -11,7 +11,7 @@ from groundenemy import GroundEnemy
 from Lives_and_Title_text import Text
 
 
-def runonGround4(final, lives, score):
+def runonGround5(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -24,7 +24,7 @@ def runonGround4(final, lives, score):
     lives = lives
 
     #initialize new background for new world
-    background1 = GroundBackground4(WIDTH, HEIGHT)
+    background1 = GroundBackground5(WIDTH, HEIGHT)
     background = background1.get_background()
 
     #ground_rects = background1.get_ground_rects()
@@ -37,19 +37,22 @@ def runonGround4(final, lives, score):
     #make all lists to store current class objects and objects being deleted
     laser = []
     laser_remove = []
-    enemy = [GroundEnemy(45*2, 45*3, 180, 'right'),
-             GroundEnemy(45*5+15, 45*6, 130),
-             GroundEnemy(45*14, 45*4, 270),
-             GroundEnemy(45*18+20, 45*10, 140, "right")]
+    enemy = []
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
     #load up images to blit
-    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
-    relic_rect1 = level2_relic.get_rect(topleft=(990, HEIGHT- 160))
-    relic_rect2 = level2_relic.get_rect(topleft =(320, 350))
-    gem_count = []
-    gem_count.clear()
+    level4_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
+    relic_rect = level4_relic.get_rect(topleft =(265, 515))
+
+    #initialize water variables
+    water_image = pygame.image.load('images/Tiles/Tiles/Water/background_terrain_top.png')
+    water_image = pygame.transform.rotozoom(water_image, 0, 0.95)
+    water_image2 = pygame.transform.rotozoom(water_image, 0, 0.93)
+    rect_size = (60, 60)
+    water_color = (175,203,211)
+    rect_surface = pygame.Surface(rect_size)
+    rect_surface.fill(water_color)
 
     #initialize texts
     texts = Text()
@@ -150,23 +153,22 @@ def runonGround4(final, lives, score):
         jumpcount = character.input(keys, jumpcount, blocks)
 
         #blit the relic and check for collisions to see if they pass the level
-        if (character.rect).colliderect(relic_rect1) == True:
-            if 1 not in gem_count:
-                gem_count.append(1)
-        if(character.rect).colliderect(relic_rect2) == True:
-            if 2 not in gem_count:
-                gem_count.append(2)
-        if 1 not in gem_count:
-            screen.blit(level2_relic, (990,HEIGHT - 160))
-        if 2 not in gem_count:
-            screen.blit(level2_relic, (320, 350))
-        if len(gem_count) == 2:
+        if (character.rect).colliderect(relic_rect) == True:
             running = False
-            print(gem_count)
+        else:
+            screen.blit(level4_relic, (265, 515))
+
 
         #update the character and blit the character onto the screen
         character.update(blocks)
         character.draw(screen)
+
+        #draw water
+        for i in range(1, 9):
+            screen.blit(rect_surface, (60*(6+i)-15, HEIGHT - 45))
+            screen.blit(water_image, (60*(6+i)-15, HEIGHT - 2*45))
+        screen.blit(water_image, (838, HEIGHT-90))
+        screen.blit(rect_surface, (838, HEIGHT-45))
 
         #check if the character has fallen off the screen
         if character.y > 700:
