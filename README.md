@@ -1,7 +1,7 @@
 ## SpaceShip Game
 
 ### Background
-![Space Background](images/Screenshots/Space Background.png)
+![Space Background](images/Screenshots/SpaceBackground.png)
 
 [Docsify Documentation Page](https://github.com/natashastramrood/game)
 
