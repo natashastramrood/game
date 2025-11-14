@@ -6,14 +6,12 @@
 [Docsify Documentation Page](https://github.com/natashastramrood/game)
 
 ### Title Screen
-![Screen 1](images/Screenshots/Screenshot 2025-11-13 201558.png)
-![Screen 2](images/Screenshots/Screenshot 2025-11-13 201700.png)
-![Screen 3](images/Screenshots/Screenshot 2025-11-13 201724.png)
-![Screen 4](docs/screenshot_4.png)
-![Screen 5](docs/screenshot_5.png)
+![Screen 1](images/Screenshots/Title.png)
 
 ### Screenshot of current game:
-![Current Game Screenshot](docs/background_screenshot.png)
+![Screen 2](images/Screenshots/shooter.png)
+![Screen 3](images/Screenshots/level2.png)
+![Screen 4](images/Screenshots/level6.png)
 
 ## Directions:
 1. Play against the enemy space ships and defeat them without losing all three of your lives.
