@@ -20,6 +20,25 @@ class Tile(pygame.sprite.Sprite):
     
     def get_rect(self):
         return self.rect
+    
+class Fire(Tile):
+    def __init__(self, x, y, roto, scale, tile_type = 'GROUND'):
+        super().__init__(x, y, tile_type = 'GROUND')
+        self.image = pygame.image.load('images/Tiles/Tiles/Water/bushOrange1.png')
+        self.stone_surface = pygame.transform.rotozoom(self.image, roto, scale)
+        self.rect = self.stone_surface.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+        self.type = tile_type
+    def get_width(self):
+        return self.stone_surface.get_width()
+    
+    def get_height(self):
+        return self.stone_surface.get_height()
+    
+    def get_rect(self):
+        return self.rect
+    
 
 class GroundBlock(Tile):
     def __init__(self, x, y):

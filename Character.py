@@ -93,7 +93,7 @@ class Character():
         self.onGround = False
         for block in blocks:
             # Check for collision
-            if self.rect.colliderect(block.rect): 
+            if self.rect.colliderect(block.rect) and block.type == 'GROUND': 
                 # Block.get_rect() is inconsistent, use .rect if possible.
                 # I've updated your Blocks to use .rect (see section 3)
 

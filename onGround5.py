@@ -37,13 +37,15 @@ def runonGround5(final, lives, score):
     #make all lists to store current class objects and objects being deleted
     laser = []
     laser_remove = []
-    enemy = []
+    enemy = [GroundEnemy(45*6, 45*3, 200, 'left', 0, 1.5),
+             GroundEnemy(45*10, 45*6, 250, 'right', 0 ,1.5),
+             GroundEnemy(45*12, 45*9, 180)]
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
     #load up images to blit
-    level4_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
-    relic_rect = level4_relic.get_rect(topleft =(265, 515))
+    level5_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
+    relic_rect = level5_relic.get_rect(topleft =(265, 515))
 
     #initialize water variables
     water_image = pygame.image.load('images/Tiles/Tiles/Water/background_terrain_top.png')
@@ -156,7 +158,7 @@ def runonGround5(final, lives, score):
         if (character.rect).colliderect(relic_rect) == True:
             running = False
         else:
-            screen.blit(level4_relic, (265, 515))
+            screen.blit(level5_relic, (265, 515))
 
 
         #update the character and blit the character onto the screen

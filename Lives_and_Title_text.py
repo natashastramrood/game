@@ -25,7 +25,7 @@ class Text():
         self.score_surface = self.score_font.render(f"Score : {score}", 1, self.white)
 
     def update_lives(self, lives):
-        self.lives_surface = self.lives_font.render(f"Lives : {lives}", 1, self.white)
+        self.lives_surface = self.lives_font.render(f"Lives : {int(lives)}", 1, self.white)
 
     def updatetitle(self):
         #adjust the alpha of the title based on how long the text has been in

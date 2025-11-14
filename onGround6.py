@@ -1,5 +1,5 @@
 import pygame
-from background import SpaceBackground, GroundBackground4
+from background import GroundBackground6
 from spaceship import Spaceship
 from laser import Laser
 from enspaceship import EnemySpaceship
@@ -9,9 +9,10 @@ from random import randint
 from Character import Character
 from groundenemy import GroundEnemy
 from Lives_and_Title_text import Text
+from Block import Fire
 
 
-def runonGround4(final, lives, score):
+def runonGround6(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -24,12 +25,12 @@ def runonGround4(final, lives, score):
     lives = lives
 
     #initialize new background for new world
-    background1 = GroundBackground4(WIDTH, HEIGHT)
+    background1 = GroundBackground6(WIDTH, HEIGHT)
     background = background1.get_background()
 
     #ground_rects = background1.get_ground_rects()
 
-    character = Character(100, 575)
+    character = Character(100, 304)
 
     #initialize variables
     jumpcount = 0
@@ -37,19 +38,24 @@ def runonGround4(final, lives, score):
     #make all lists to store current class objects and objects being deleted
     laser = []
     laser_remove = []
-    enemy = [GroundEnemy(45*2, 45*3, 180, 'right'),
-             GroundEnemy(45*5+15, 45*6, 130),
-             GroundEnemy(45*14, 45*4, 270),
-             GroundEnemy(45*18+20, 45*10, 140, "right")]
+    enemy = [GroundEnemy(45*4, HEIGHT - 45*3+20, 195),
+             GroundEnemy(45*4, 45*2, 195, 'left', 0, 1.5),
+             GroundEnemy(45*17, HEIGHT - 45*3+20, 225)]
+    fire = []
+    
+    fire.append(Fire(45*12+7, 700-45*(13)+15, 90, 0.35))
+    fire.append(Fire(45*13-7, 700-45*(13)+15, -90, 0.35))
+    for i in range(0, 9):
+        fire.append(Fire(45*12+7, 700-45*(12-i), 90, 0.35))
+    for i in range(0, 9):
+        fire.append(Fire(45*13-7, 700-45*(12-i), -90, 0.35))
+        
     enemy_remove = []
     enemylaser = []
     enemylaser_remove = []
     #load up images to blit
-    level2_relic = pygame.image.load('images/PNG/Items/platformPack_item010.png')
-    relic_rect1 = level2_relic.get_rect(topleft=(990, HEIGHT- 160))
-    relic_rect2 = level2_relic.get_rect(topleft =(320, 350))
-    gem_count = []
-    gem_count.clear()
+    level6_relic = pygame.image.load('images/PNG/Items/platformPack_item002.png')
+    relic_rect = level6_relic.get_rect(topleft =(990, 50))
 
     #initialize texts
     texts = Text()
@@ -104,7 +110,7 @@ def runonGround4(final, lives, score):
                 lives -= 1
                 score -= 20
                 character.x = 100
-                character.y = 550
+                character.y = 304
                 continue
 
         #remove enemies and lasers that are intersecting
@@ -150,29 +156,28 @@ def runonGround4(final, lives, score):
         jumpcount = character.input(keys, jumpcount, blocks)
 
         #blit the relic and check for collisions to see if they pass the level
-        if (character.rect).colliderect(relic_rect1) == True:
-            if 1 not in gem_count:
-                gem_count.append(1)
-        if(character.rect).colliderect(relic_rect2) == True:
-            if 2 not in gem_count:
-                gem_count.append(2)
-        if 1 not in gem_count:
-            screen.blit(level2_relic, (990,HEIGHT - 160))
-        if 2 not in gem_count:
-            screen.blit(level2_relic, (320, 350))
-        if len(gem_count) == 2:
+        if (character.rect).colliderect(relic_rect) == True:
             running = False
-            print(gem_count)
+        else:
+            screen.blit(level6_relic, (990, 50))
+
+        for i in fire: 
+            screen.blit(i.stone_surface, (i.rect.x, i.rect.y))
+
+        for i in fire:
+            if character.rect.colliderect(i.rect) == True:
+                lives -= 0.5
+                character.x = 100
+                character.y = 304
+                character.yspeed = 0
+                continue
+
+
 
         #update the character and blit the character onto the screen
         character.update(blocks)
         character.draw(screen)
 
-        #check if the character has fallen off the screen
-        if character.y > 700:
-            character.x = 100
-            character.y = 550
-            lives -= 1
 
         if lives <= 0:
             running = False

@@ -15,6 +15,7 @@ from OnGround2 import runonGround2
 from OnGround3 import runonGround3
 from onGround4 import runonGround4
 from onGround5 import runonGround5
+from onGround6 import runonGround6
 
 pygame.init()
 
@@ -45,19 +46,17 @@ while num_completed < 6 and final != 1:
         levels_completed.append(3)
     if level == 4: 
         final, lives, score = runWorld1(final, 'red', score) # space world
-        final, lives, score = runonGround4(final, lives, score)
-        #final, lives = runWorld2(final, lives) # world 2 
+        final, lives, score = runonGround4(final, lives, score) # on ground world
         num_completed += 1
         levels_completed.append(4)
     if level == 5: 
-        #final, lives, score = runSecondWorld1(final, 'blue', score) # space world
-        final, lives, score = runonGround5(final, lives, score)
-        #final, lives = runWorld2(final, lives) # world 2 
+        final, lives, score = runSecondWorld1(final, 'blue', score) # space world
+        final, lives, score = runonGround5(final, lives, score) # on ground world
         num_completed += 1
         levels_completed.append(5)
     if level == 6: 
         final, lives, score = runSecondWorld1(final, 'orange', score) # space world
-        #final, lives = runWorld2(final, lives) # world 2 
+        final, lives, score = runonGround6(final, lives, score) # on ground world
         num_completed += 1
         levels_completed.append(6)
 

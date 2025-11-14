@@ -347,6 +347,8 @@ class GroundBackground5():
             self.blocks.append(Tile(self.width-self.stone_width, x))
         for i in range(0, 11):
             self.blocks.append(Tile(self.stone_height*4, self.height-self.stone_height*(2+i)))
+        self.blocks.append(Tile(self.stone_width*3, self.stone_height*8))
+        self.blocks.append(Tile(self.stone_width, self.stone_height*4))
         for i in range(0, 17):
             self.blocks.append(Tile(self.stone_height*(4+i), self.height- self.stone_height*(12)))
         for i in range(0, 8):
@@ -358,6 +360,10 @@ class GroundBackground5():
         for i in range(0, 10):
             self.blocks.append(Tile(self.stone_height*(20-i), self.height- self.stone_height*(6)))
         
+        self.blocks.append(Tile(self.stone_height*16, self.height-self.stone_height*3))
+        self.blocks.append(Tile(self.stone_height*13, self.height-self.stone_height*3))
+        self.blocks.append(Tile(self.stone_height*9, self.height-self.stone_height*3))
+        
 
         for i in self.blocks: 
             self.final_background.blit(i.stone_surface, (i.rect.x, i.rect.y))
@@ -368,6 +374,66 @@ class GroundBackground5():
     def get_background(self):
         return self.final_background
     
+class GroundBackground6():
+    def __init__(self, WIDTH, HEIGHT):
+        self.width = WIDTH
+        self.height = HEIGHT
+        self.final_background = pygame.Surface((self.width, self.height))
+        self.final_background.fill((175, 101, 75))
+
+        #get standard stone images/sizes
+        self.stone_path = 'images/Tiles/Tiles/Stone/tile_0004.png'
+        self.stone_surface = pygame.image.load(self.stone_path)
+        self.stone_surface = pygame.transform.rotozoom(self.stone_surface, 0, 2.5) 
+        self.stone_width = self.stone_surface.get_width()
+        self.stone_height = self.stone_surface.get_height()
+
+        self.blocks = []
+        
+
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(x, self.height-self.stone_height))
+            self.blocks.append(Tile(x, self.height-2*self.stone_height))
+
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(0, x))
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(x,0))
+        for x in range(0, self.width, self.stone_width):
+            self.blocks.append(Tile(self.width-self.stone_width, x))
+
+        for i in range(0,4):
+            self.blocks.append(Tile(self.stone_width*(1+i), self.height-self.stone_height*8))
+        for i in range(0,4):
+            self.blocks.append(Tile(self.stone_width*(3+i), self.height-self.stone_height*5))
+        for i in range(0,6):
+            self.blocks.append(Tile(self.stone_width*(1+i), self.height-self.stone_height*11))
+        for i in range(0,7):
+            self.blocks.append(Tile(self.stone_width*7, self.height-self.stone_height*(11-i)))
+        for i in range(0,12):
+            self.blocks.append(Tile(self.stone_width*10, self.height-self.stone_height*(12-i)))
+        for i in range(0, 28):
+            self.blocks.append(Tile(self.stone_width*(3)+i*13, self.stone_height*3-17, 0.75))
+        self.blocks.append(Tile(self.stone_width*10, self.height-self.stone_height*(13)+15))
+        for i in range(0,10):
+            self.blocks.append(Tile(self.stone_width*17, self.stone_height*(1+i)))
+        for i in range(0,4):
+            self.blocks.append(Tile(self.stone_width*(17+i), self.stone_height*(10)))
+        for i in range(0,3):
+            self.blocks.append(Tile(self.stone_width*(20+i)+20, self.stone_height*(7)))
+        for i in range(0,2):
+            self.blocks.append(Tile(self.stone_width*(17+i), self.stone_height*(4)))
+        for i in range(0,2):
+            self.blocks.append(Tile(self.stone_width*(21+i)+20, self.stone_height*(3)))
+
+        for i in self.blocks: 
+            self.final_background.blit(i.stone_surface, (i.rect.x, i.rect.y))
+
+    def get_ground(self):
+        return self.blocks
+
+    def get_background(self):
+        return self.final_background
 
 
         
