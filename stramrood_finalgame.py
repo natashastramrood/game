@@ -42,7 +42,7 @@ while num_completed < 6 and final != 1:
     if level == 3: 
         final, lives, score = runWorld1(final, 'blue', score) # space world
         final, lives, score = runonGround3(final, lives, score) # on ground world
-        num_completed += 1
+        num_completed += 1 
         levels_completed.append(3)
     if level == 4: 
         final, lives, score = runWorld1(final, 'red', score) # space world
@@ -69,6 +69,6 @@ else:
     result = 1
 
 #end screen
-runEndScreen(result)
+runEndScreen(result, score)
 
 pygame.quit()
