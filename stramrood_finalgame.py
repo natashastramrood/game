@@ -16,6 +16,7 @@ from OnGround3 import runonGround3
 from onGround4 import runonGround4
 from onGround5 import runonGround5
 from onGround6 import runonGround6
+from TitleScreen import runTitleScreen
 
 pygame.init()
 
@@ -26,6 +27,10 @@ num_completed = 0
 levels_completed = []
 
 while num_completed < 6 and final != 1:
+    if num_completed == 0:
+        final = runTitleScreen(final)
+        if final == 1:
+            break
     level = 0
     final, level = runLevelSelectionScreen(levels_completed)
 
