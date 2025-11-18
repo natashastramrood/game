@@ -12,10 +12,13 @@ def runEndScreen(result, score):
     clock = pygame.time.Clock()
 
     score_surface = font2.render(f'Final Score: {score}', True, bright_blue)
+    play_again = font2.render("Press SPACE to Play Again!", True, bright_blue)
     background = SpaceBackground(WIDTH, HEIGHT)
     background = background.get_background()
 
-    while running:
+    checker = False
+
+    while running==True and checker == False:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
@@ -28,9 +31,16 @@ def runEndScreen(result, score):
         else: 
             text_surface = font.render("End Game!", True, bright_blue)
 
-        screen.blit(score_surface, (310, 400))
-        
-        screen.blit(text_surface, (165, 225))
+        screen.blit(score_surface, (370, 375))
+        screen.blit(play_again, (190, 450))
+        screen.blit(text_surface, (155, 200))
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_SPACE]:
+            checker = True
         pygame.display.flip()
         clock.tick(1200)  
+    if checker == True:
+        return checker
+    else:
+        return False
     
