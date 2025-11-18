@@ -27,7 +27,11 @@ def runonGround5(final, lives, score):
     background1 = GroundBackground5(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    #ground_rects = background1.get_ground_rects()
+    ##Initialize sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hitonground.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+    relic_collect_sound = pygame.mixer.Sound("Sounds/reliccollect.ogg")
+    water_sound = pygame.mixer.Sound("Sounds/fallintowater.ogg")
 
     character = Character(100, 550)
 
@@ -101,6 +105,7 @@ def runonGround5(final, lives, score):
                 lives = lives - 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
         
         #check if enemies and character are intersecting
@@ -148,15 +153,18 @@ def runonGround5(final, lives, score):
                 if character.direction == 'right':
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
+                    laser_sound.play()
                 elif character.direction == 'left':
                     laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
+                    laser_sound.play()
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
         #blit the relic and check for collisions to see if they pass the level
         if (character.rect).colliderect(relic_rect) == True:
             running = False
+            relic_collect_sound.play()
         else:
             screen.blit(level5_relic, (265, 515))
 
@@ -177,6 +185,7 @@ def runonGround5(final, lives, score):
             character.x = 100
             character.y = 550
             lives -= 1
+            water_sound.play()
 
         if lives <= 0:
             running = False

@@ -11,7 +11,7 @@ from groundenemy import GroundEnemy
 from Lives_and_Title_text import Text
 
 
-def runWorld2(final, lives, score):
+def runonGround1(final, lives, score):
 
     WIDTH = 1100
     HEIGHT = 700
@@ -27,7 +27,10 @@ def runWorld2(final, lives, score):
     background1 = GroundBackground(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    #ground_rects = background1.get_ground_rects()
+    #Initialize sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hitonground.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+    relic_collect_sound = pygame.mixer.Sound('Sounds/reliccollect.ogg')
 
     character = Character(20, 400)
 
@@ -84,6 +87,7 @@ def runWorld2(final, lives, score):
                 lives = lives - 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
         
         #check if enemies and character are intersecting
@@ -91,6 +95,7 @@ def runWorld2(final, lives, score):
             if enemy[i].get_rect().colliderect(character.rect):
                 lives -= 1
                 score -= 20
+                #maybe make a thud sound?
                 if character.x-100 >= 20:
                     character.x = character.x-100
                 else:
@@ -130,9 +135,11 @@ def runWorld2(final, lives, score):
                 if character.direction == 'right':
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
+                    laser_sound.play()
                 elif character.direction == 'left':
                     laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
+                    laser_sound.play()
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
@@ -141,6 +148,7 @@ def runWorld2(final, lives, score):
             screen.blit(level1_relic, (1025,450))
         if (character.rect).colliderect(relic_rect): 
             running = False
+            relic_collect_sound.play()
 
         character.update(blocks)
         character.draw(screen)

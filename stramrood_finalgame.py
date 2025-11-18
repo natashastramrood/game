@@ -7,7 +7,7 @@ from enemylaser import EnemyLaser
 from asteroid import Asteroid
 from random import randint
 from World1 import runWorld1
-from World2 import runWorld2
+from onGround1 import runonGround1
 from EndScreen import runEndScreen
 from StartingScreen import runLevelSelectionScreen
 from SecondWorld1 import runSecondWorld1
@@ -36,7 +36,7 @@ while num_completed < 6 and final != 1:
 
     if level == 1:
         final, lives, score = runSecondWorld1(final, 'green', score) # space world
-        final, lives, score = runWorld2(final, lives, score) # on ground world
+        final, lives, score = runonGround1(final, lives, score) # on ground world
         num_completed += 1
         levels_completed.append(1)
     if level == 2: 

@@ -27,7 +27,10 @@ def runonGround4(final, lives, score):
     background1 = GroundBackground4(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    #ground_rects = background1.get_ground_rects()
+    #Initialize sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hitonground.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+    relic_collect_sound = pygame.mixer.Sound("Sounds/reliccollect.ogg")
 
     character = Character(100, 575)
 
@@ -96,6 +99,7 @@ def runonGround4(final, lives, score):
                 lives = lives - 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
         
         #check if enemies and character are intersecting
@@ -143,9 +147,11 @@ def runonGround4(final, lives, score):
                 if character.direction == 'right':
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
+                    laser_sound.play()
                 elif character.direction == 'left':
                     laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
+                    laser_sound.play()
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
@@ -153,9 +159,11 @@ def runonGround4(final, lives, score):
         if (character.rect).colliderect(relic_rect1) == True:
             if 1 not in gem_count:
                 gem_count.append(1)
+                relic_collect_sound.play()
         if(character.rect).colliderect(relic_rect2) == True:
             if 2 not in gem_count:
                 gem_count.append(2)
+                relic_collect_sound.play()
         if 1 not in gem_count:
             screen.blit(level2_relic, (990,HEIGHT - 160))
         if 2 not in gem_count:

@@ -59,6 +59,10 @@ def runSecondWorld1(final, color, s):
     background = SpaceBackground(WIDTH, HEIGHT)
     background = background.get_background()
 
+    #initialize the sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hit.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+
     #final checks if the person exited the game voluntarily
     final1 = final
     #running checks if that level is running or not
@@ -84,6 +88,7 @@ def runSecondWorld1(final, color, s):
             if counter > 10:
                 laser.append(Laser(spaceship1.x, spaceship1.y, 7, 7, spaceship1.roto))
                 counter = 0
+                laser_sound.play()
             counter += 1
         
         #go through the lasers and update their positions
@@ -107,6 +112,7 @@ def runSecondWorld1(final, color, s):
                 lives -= 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
         
         #update asteroid position
@@ -199,6 +205,7 @@ def runSecondWorld1(final, color, s):
             if counter > 10:
                 laser.append(Laser(spaceship1.x, spaceship1.y, 7, 7, spaceship1.roto))
                 counter = 0
+                laser_sound.play()
             counter += 1
         
         #go through the lasers and update their positions
@@ -222,6 +229,7 @@ def runSecondWorld1(final, color, s):
                 lives -= 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
 
         for i in range(len(asteroids)):

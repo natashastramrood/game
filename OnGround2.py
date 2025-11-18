@@ -27,7 +27,10 @@ def runonGround2(final, lives, score):
     background1 = GroundBackground2(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    #ground_rects = background1.get_ground_rects()
+    #Initialize sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hitonground.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+    relic_collect_sound = pygame.mixer.Sound("Sounds/reliccollect.ogg")
 
     character = Character(100, 550)
 
@@ -88,6 +91,7 @@ def runonGround2(final, lives, score):
                 lives = lives - 1
                 score -= 20
                 enemylaser_remove.append(i)
+                #maybe add a new hit sound
                 continue
         
         #check if enemies and character are intersecting
@@ -95,6 +99,7 @@ def runonGround2(final, lives, score):
             if enemy[i].get_rect().colliderect(character.rect):
                 lives -= 1
                 score -= 20
+                hit_sound.play()
                 if character.x-100 >= 20:
                     character.x = character.x-100
                 else:
@@ -134,9 +139,11 @@ def runonGround2(final, lives, score):
                 if character.direction == 'right':
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
+                    laser_sound.play()
                 elif character.direction == 'left':
                     laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
+                    laser_sound.play()
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
@@ -145,6 +152,7 @@ def runonGround2(final, lives, score):
             screen.blit(level2_relic, (675,400))
         if (character.rect).colliderect(relic_rect): 
             running = False
+            relic_collect_sound.play()
 
         character.update(blocks)
         character.draw(screen)

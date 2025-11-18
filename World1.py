@@ -21,6 +21,10 @@ def runWorld1(final, color, s):
     #create our user spaceship
     spaceship1 = Spaceship(WIDTH/2, HEIGHT/2, 5, 5)
 
+    #initialize sounds
+    hit_sound = pygame.mixer.Sound('Sounds/hit.ogg')
+    laser_sound = pygame.mixer.Sound('Sounds/laser.ogg')
+
 
     #initialise starting enemy ships
     enemy_spaceship = [EnemySpaceship(color1, WIDTH-60, 70, 90, 2),
@@ -79,6 +83,7 @@ def runWorld1(final, color, s):
             if counter > 20:
                 laser.append(Laser(spaceship1.x, spaceship1.y, 7, 7, spaceship1.roto))
                 counter = 0
+                laser_sound.play()
             counter += 1
         
         #go through the lasers and update their positions
@@ -102,6 +107,7 @@ def runWorld1(final, color, s):
                 lives = lives - 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
         
         #update asteroid position
@@ -143,7 +149,7 @@ def runWorld1(final, color, s):
         texts.drawlives(screen)
 
         #check if it runs off the screen
-        if spaceship1.x > WIDTH or spaceship1.y > HEIGHT:
+        if spaceship1.x > WIDTH or spaceship1.y > HEIGHT or spaceship1.x<0 or spaceship1.y<0:
             lives -= 1
             score -= 150
             spaceship1.x = WIDTH/2
@@ -194,6 +200,7 @@ def runWorld1(final, color, s):
             if counter > 10:
                 laser.append(Laser(spaceship1.x, spaceship1.y, 7, 7, spaceship1.roto))
                 counter = 0
+                laser_sound.play()
             counter += 1
         
         #go through the lasers and update their positions
@@ -217,6 +224,7 @@ def runWorld1(final, color, s):
                 lives -= 1
                 score -= 20
                 enemylaser_remove.append(i)
+                hit_sound.play()
                 continue
 
         for i in range(len(asteroids)):

@@ -27,7 +27,11 @@ def runonGround3(final, lives, score):
     background1 = GroundBackground3(WIDTH, HEIGHT)
     background = background1.get_background()
 
-    #ground_rects = background1.get_ground_rects()
+    #Initialize sounds
+    hit_sound = pygame.mixer.Sound("Sounds/hitonground.ogg")
+    laser_sound = pygame.mixer.Sound("Sounds/laser.ogg")
+    relic_collect_sound = pygame.mixer.Sound("Sounds/reliccollect.ogg")
+    water_sound = pygame.mixer.Sound('Sounds/fallintowater.ogg')
 
     character = Character(100, 550)
 
@@ -100,6 +104,7 @@ def runonGround3(final, lives, score):
             if enemylaser[i].get_rect().colliderect(character.rect):
                 lives = lives - 1
                 score -= 20
+                hit_sound.play()
                 enemylaser_remove.append(i)
                 continue
         
@@ -108,21 +113,8 @@ def runonGround3(final, lives, score):
             if enemy[i].get_rect().colliderect(character.rect):
                 lives -= 1
                 score -= 20
-                if character.x - 100 >=(60*(4)-15) and character.x-100 <= (60*(6)-15):
-                    character.x = 60
-                    character.y = HEIGHT - (45*3 +25)
-                elif character.x - 100 >= (53*(12)-5) and character.x - 100 <= (53*(16)-10):
-                    character.x = 60
-                    character.y = HEIGHT - (45*3 +25)
-                elif character.x-100 >= 60:
-                    if character.direction == 'right':
-                        character.x = character.x-100
-                        character.y = HEIGHT - (45*3 +25)
-                    elif character.direction == 'left':
-                        character.x = character.x+100
-                        character.y = HEIGHT - (45*3 +25)
-                else:
-                    character.x = 60
+                character.x = 100
+                character.y = 550
                 continue
 
         #remove enemies and lasers that are intersecting
@@ -161,9 +153,11 @@ def runonGround3(final, lives, score):
                 if character.direction == 'right':
                     laser.append(Laser(character.x, character.y, 7, 7, character.roto))
                     counter = 0
+                    laser_sound.play()
                 elif character.direction == 'left':
                     laser.append(Laser(character.x, character.y, 7, 7, 180))
                     counter = 0
+                    laser_sound.play()
             counter += 1
         jumpcount = character.input(keys, jumpcount, blocks)
 
@@ -172,6 +166,7 @@ def runonGround3(final, lives, score):
             screen.blit(level2_relic, (990,50))
         if (character.rect).colliderect(relic_rect): 
             running = False
+            relic_collect_sound.play()
 
         #update the character and blit the character onto the screen
         character.update(blocks)
@@ -196,6 +191,7 @@ def runonGround3(final, lives, score):
             character.x = 100
             character.y = 550
             lives -= 1
+            water_sound.play()
 
         if lives <= 0:
             running = False
